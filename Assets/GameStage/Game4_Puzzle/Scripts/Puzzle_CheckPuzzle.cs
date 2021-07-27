@@ -30,7 +30,7 @@ public class Puzzle_CheckPuzzle : MonoBehaviour {
         vm = GameObject.Find("VoiceManager").GetComponent<VoiceManager>();
     }
     void Update(){
-        if(transform.childCount <= 9){          // 퍼즐을 다 맞추면
+        if(transform.childCount <= 9){          //퍼즐을 다 맞추면
             if(!mb_checkVoice){                 //스크립트 음성이 한번도 나온적이 없다면
                 vm.playVoice(0);                //스크립트 음성 재생
                 mb_checkVoice = true;           //스크립트 음성 재생 체크

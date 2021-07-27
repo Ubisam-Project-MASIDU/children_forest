@@ -40,13 +40,13 @@ public class Puzzle_Matching_Puzzle : MonoBehaviour{
     }
     void OnTriggerStay2D(Collider2D cCollideObject){
         if(Input.GetMouseButtonUp(0)){                                                                          //손을 뗐을 때
-            if (cCollideObject.name[cCollideObject.name.Length - 1] == this.name[this.name.Length - 1]){        //매칭퍼즐과 매칭퍼즐과 모양이같은퍼즐의 이름 맨 뒤(숫자)가 같은 경우
+            if (cCollideObject.name[cCollideObject.name.Length - 1] == this.name[this.name.Length - 1]){        //정답이면
                 if (mb_classifyWhetherAns){                                                                     //answer부분변경
                     Color tempColor = gameObject.GetComponent<SpriteRenderer>().color;                          //흐렷던 퍼즐조각을 선명하게 변경
                     tempColor.a = 1f;
                     gameObject.GetComponent<SpriteRenderer>().color = tempColor;    
                 }
-                else{                                                                                       // matching부분변경
+                else{                                                                                           
                     Destroy(this.gameObject);
                 }
             }
