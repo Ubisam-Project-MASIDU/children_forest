@@ -62,15 +62,17 @@
 
 1. VoiceManager 프리팹을 사용하는 경우
 
-    - 사용하려는 씬에 VoiceManager 프리팹을 드래그하여 적용시키고, VoiceManager 오브젝트의 인스펙터 창에서 원하는 
+    - 사용하려는 씬에 해당 프리팹을 드래그하여 설정하고, VoiceManager 오브젝트의 인스펙터 창에서 원하는 음성 높낮이 (pitch), 말 빠르기 (speaking rate), 텍스트를 조정할 수 있다. 
+    - 인스펙터 창에서 설정한 후에 원하는 스크립트 코드에서 playVoice(id or name -> 이때 id는 인스펙터 창에서 설정한 설정 리스트들의 인덱스라고 보면 된다)
 
-2. 스크립트를 띄우는 방법
+2. FixedStartScene 스크립트 안의 주석처리
 
-    - 메인 스크립트인 Jack3_EventController.cs 에서 각 스크립트를 오브젝트를 통해 연결을하고 v_NextScript() 함수를 작동하면 다음 스크립트가 나타난다.
+    - 빌드 시에는 꼭 주석처리를 풀어주고 빌드해야 한다.
 
-3. 대화를 지우는 방법
+3. BackgroundCanvas 프리팹 사용하는 경우
 
-    - v_NoneScript()함수를 사용하면 된다.
-
-***
+    - 사용하려는 씬에 해당 프리팹을 드래그하여 설정하고, 인스펙터 창의 캔버스 컴포넌트 창의 Render Camera를 씬의 Main Camera를 드래그하여 넣어 설정하고, 적용되어 있는 ImgSizeResize 스크립트의 sprite 값을 사용하고자 하는 배경 이미지를 드래그하여 설정해주어야 한다. (JackBackgroundCanvas 프리팹을 사용하는 경우도 동일하다.)
+-------------
+## README.md Change history
+> ##### *2021.7.27 최대준 create*
 
