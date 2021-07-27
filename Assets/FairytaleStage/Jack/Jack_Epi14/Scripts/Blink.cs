@@ -12,7 +12,6 @@
   * mf_time : 깜빡거리는 속도
   * mf_timer : 경과시간
   * mf_waitingTime : 원하는 특정 시간 지정
-  *
   */
 
 using System.Collections;
