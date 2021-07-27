@@ -3,32 +3,37 @@
  * - Writer : 최대준
  * - Content : Text to Speech Class로, 디자인 패턴은 싱글톤 패턴을 이용하였다. 조금 무거운 클래스 이므로 하나의 인스턴스를 다른 오브젝트 클래스에서 재사용할 수 있도록 하기 위해서 싱글톤 패턴을 이용하였다.
  * 
-*             -사용법-
-*            1. VoiceManager라는 오브젝트를 프리팹으로 만들어두었다. 그것을 이용해서 쓰기만 하면 된다.
-*            2. TTS 클래스를 선언한다. ex) TTS mtts_testTTS;
-*            3. VoiceManager라는 클래스의 안을 살펴보자면,
-*            4. 아래의 쓰여진 TTS 클래스는 싱글톤 패턴이기 때문에 이미 사용중인 인스턴스가 있는지 확인하고 없으면 초기화한 인스턴스를 반환하는 함수를 호출한다. ex) mtts_textTTS = TTS.getInstance();
-*            5. VoiceManager는 인스펙터로 만들 보이스를 받아들이고 보이스를 TTS 클래스에서 구글 api를 통해서 audioclip으로 반환받게 된다.
-*            6. VoiceManager클래스는 AudioClip형태로 오디오를 가지고 있고, 클래스 안의 함수인 playVoice(id)함수를 통해서 음성을 씬에 출력하게 된다.
-*            -작성 기록-
-*            2021-07-19 : 제작 완료
-*            2021-07-20 : 주석 처리
-*            2021-07-22 : createAudio() 함수의 반환 값을 AudioClip이 아닌 float Array 방식으로 바꾸었다.
- * 
+ * - How to Use-
+ * 1. VoiceManager라는 오브젝트를 프리팹으로 만들어두었다. 그것을 이용해서 쓰기만 하면 된다.
+ * 2. TTS 클래스를 선언한다. ex) TTS mtts_testTTS;
+ * 3. VoiceManager라는 클래스의 안을 살펴보자면,
+ * 4. 아래의 쓰여진 TTS 클래스는 싱글톤 패턴이기 때문에 이미 사용중인 인스턴스가 있는지 확인하고 없으면 초기화한 인스턴스를 반환하는 함수를 호출한다. ex) mtts_textTTS = TTS.getInstance();
+ * 5. VoiceManager는 인스펙터로 만들 보이스를 받아들이고 보이스를 TTS 클래스에서 구글 api를 통해서 float array 형태로 반환받게 된다.
+ * 6. VoiceManager클래스는 float array형태로 받은 오디오 데이터를 AudioClip형태로 변환하여 가지고 있고, 클래스 안의 함수인 playVoice(id or name)함수를 통해서 음성을 씬에 출력하게 된다.
+ *
+ * - History -
+ * 2021-07-19 : 제작 완료
+ * 2021-07-20 : 주석 처리
+ * 2021-07-22 : createAudio() 함수의 반환 값을 AudioClip이 아닌 float Array 방식으로 바꾸었다.
+ * 2021-07-27 : 피드백에 의한 주석 변경.
+ *
  * - TTS Member Variable 
+ *
  * ms_useApiURL : Google TTS API 서버와 통신을 위한 URL 주소이다.
  * mstts_setTtsApi : Google TTS API 서버와 통신하여 데이터를 주고 받기 위한 데이터 형식을 맞춰주는 클래스이다. 이 안에는 보이스의 종류, 음조, 음성으로 바꿀 텍스트 등 음서으로 바꾸기 위해서 필요로 하는 세팅 데이터가 설정된다. 이때 이 세팅을 저장하는 이너클래스가 존재하는데, 각각 SetTextToSpeech, 
  * instance : 이 함수는 아무래도 통신을 하는 클래스로써, 무겁다고 작성자가 판단이 되어 클래스의 인스턴스를 계속 생산하는 것이 아니라, 싱글톤 디자인 패턴을 이용하여 하나의 인스턴스만 생성하게 만들었다. 이렇게 하면, 클래스의 인스턴스를 하나만 생성하여 여러 오브젝트 클래스들이 재사용할 수 있게 된다.
  * 
  * - TTS Member Function
+ *
  * TextToSpeechPost() : 본 스크립트 코드의 클래스에서는 Rest API를 이용하여 Google TTS API와 통신하기 때문에 그에 필요한 통신 코드가 들어있는 함수이다.
  * ConvertByteToFloat() : 통신을 통해 원하는 음성을 바이트 형태로 Google TTS API 서버에서 보내주게 되고, 우리는 그것을 AudioClip형태로 만들기 위해서 float형태로 변환시켜야 한다. 그 작업을 해주는 함수이다.
  * setInput() : 통신에 필요한 음성 세팅 정보에 대해서 설정하는 함수이다. 여기서 설정하는 정보는 어떤 Text를 음성으로 변환할지를 설정해주는 함수이다.
  * setAudioConfig() : 통신에 필요한 음성 세팅 정보에 대해서 설정하는 함수이다. 여기서 설정하는 정보는 음성의 음조, 말 빠르기를 어떻게 할지를 설정해주는 함수이다.
  * setVoice() : 통신에 필요한 음성 세팅 정보에 대해서 설정하는 함수이다. 여기서 설정하는 정보는 Google TTS API에서 정해놓은 보이스 종류를 설정해주는 함수이다.
- * CreateAudio() : 최종적으로 Google TTS API서버에서 받은 바이트 데이터를 float 데이터로 변환했었는데, 이것을 이용해서 유니티에서 이용할 수 있는 AudioClip으로 만드는 작업을 해주는 함수이다. -> 2021-07-20
+ * CreateAudio() : 최종적으로 Google TTS API서버에서 받은 바이트 데이터를 float 데이터로 변환했었는데, 이것을 이용해서 유니티에서 이용할 수 있는 AudioClip으로 만드는 작업을 해주는 함수이다.(2021-07-22 updated, 아래에는 상세한 이유를 적었다.)
  * 반환값을 AudioClip에서 float array 형태로 바꾸었다. 이 이유는, AudioClip을 다루려면, 메인 스레드가 다루어야 하기 때문이다. 
  * TTS 통신은 메인 스레드가 아닌 스레드에서 담당하도록 설계를 바꾸게 되었다. 그 이유는 메인 스레드에서 UI와 이 TTS 통신에 데이터 처리까지 맡게 되면, 부하가 커져서 화면이 멈추는 프리징 현상이 일어나게 되기 때문에 반환값을 바꾸어 메인 스레드가 아닌 스레드에서 처리하도록 바꾸었다.
+ *
  */
 
 using System.Collections;
@@ -179,12 +184,14 @@ public class TTS {
             return null;
         }
     }
+
     // 이 아래 코드는 클래스 앞부분에서 보았던 음성 세팅 설정들을 설정해주는 함수이다.
     private void setInput(string sTargetSpeech) {
         SetInput si_setInputData = new SetInput();
         si_setInputData.text = sTargetSpeech;
         mstts_setTtsApi.input = si_setInputData;
     }
+
     private void setAudioConfig(float fSetPitch, float fSpeakRate) {
         SetAudioConfig sa_setAudioConf = new SetAudioConfig();
         sa_setAudioConf.audioEncoding = "LINEAR16";
@@ -193,6 +200,7 @@ public class TTS {
         sa_setAudioConf.volumeGainDb = 0;
         mstts_setTtsApi.audioConfig = sa_setAudioConf;
     }
+
     private void setVoice(Voice srcVoice) {
         SetVoice sv_setVoiceConf = new SetVoice();
         switch(srcVoice) {
@@ -237,7 +245,6 @@ public class TTS {
                 sv_setVoiceConf.ssmlGender = "MALE";
                 break;   
         }
-        
         mstts_setTtsApi.voice = sv_setVoiceConf;
     }
 }

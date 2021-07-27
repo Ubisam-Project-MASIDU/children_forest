@@ -2,15 +2,21 @@
  * - Name : DragDestroy.cs
  * - Writer : 최대준
  * - Content : 잭과콩나무 에피소드1 - 
- *          -기록-
- *          2021-07-21 : 작성
- * - DragDestroy Member variable
+ * - History -
+ * 2021-07-21 : 작성
+ * 2021-07-27 : 피드백에 의한 주석 변경.
+ *
+ * - DragDestroy Member variables
+ *
  * null
- * - DragDestroy Member function
+ *
+ * - DragDestroy Member functions
+ *
  * OnMouseDrag() : 드래그 시에 잭에게 띄워놓았던 말풍선을 없애는 함수이다.
- * SceneManager.LoadScene("") : 다음 Scene으로 이동 하는 함수
+ * SceneManager.LoadScene() : 다음 Scene으로 이동 하는 함수
  * 
  */
+ 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
