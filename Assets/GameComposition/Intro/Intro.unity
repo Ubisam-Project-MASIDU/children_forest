@@ -267,8 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c836b669e8de4ef48f201b5b747fda8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_StartPanel: {fileID: 1509133281}
-  g_IntroPanel: {fileID: 1227694210}
+  mg_StartPanel: {fileID: 1509133281}
+  mg_IntroPanel: {fileID: 1227694210}
 --- !u!4 &927498990
 Transform:
   m_ObjectHideFlags: 0
@@ -368,7 +368,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1187041978}
   - component: {fileID: 1187041979}
-  - component: {fileID: 1187041980}
   m_Layer: 5
   m_Name: StartSong
   m_TagString: Untagged
@@ -491,19 +490,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1187041980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1187041977}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d23d4801681db44fb907fb4915d8a296, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeOutSeconds: 10
 --- !u!1 &1227694210
 GameObject:
   m_ObjectHideFlags: 0
