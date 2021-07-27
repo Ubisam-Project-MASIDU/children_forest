@@ -10,7 +10,7 @@
  * 2021-07-27 : 주석 처리 수정
  *
  * <Variable>
- * Jack : 잭 오브젝트
+ * mg_Jack : 잭 오브젝트
  * sc : 동화 스크립트 나타내기 위한 오브젝트
  * vm : 음성 TTS를 처리하는 오브젝트 연결
  *
@@ -27,7 +27,7 @@ using UnityEngine.SceneManagement;
 
 //거인을 피해 옷장 뒤로 잭을 숨기기 위한 잭 드래그하는 클래스
 public class Drag_Jack : MonoBehaviour{   
-    public GameObject Jack;
+    public GameObject mg_Jack;
     public ScriptControl sc;
     VoiceManager vm;
 
@@ -54,7 +54,7 @@ public class Drag_Jack : MonoBehaviour{
     void OnMouseDrag(){
                 Vector2 v2mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 Vector2 v2worldObjPos = Camera.main.ScreenToWorldPoint(v2mousePosition);
-                Jack.transform.position = v2worldObjPos;
+                mg_Jack.transform.position = v2worldObjPos;
     }
 
     //Epi9로 씬 이동을 위한 함수

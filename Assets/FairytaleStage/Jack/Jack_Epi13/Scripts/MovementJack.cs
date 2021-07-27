@@ -35,11 +35,12 @@ public class MovementJack : MonoBehaviour{
     VoiceManager vm;
     private AudioSource ScreamSound;
 
+    //초기설정
     void Start(){
         sc = ScriptControl.GetInstance();
         this.vm = GameObject.Find("VoiceManager").GetComponent<VoiceManager>();
         ScreamSound = GameObject.Find("ScreamSound").GetComponent<AudioSource>();
-        Invoke("PlayScream",1f);  //1초 후 PlayScream 함수 재생
+    Invoke("PlayScream",1f);                                                                //1초 후 PlayScream 함수 재생
     }
     void Update(){
         if(vm.mb_checkSceneReady) {                                                         //tts 준비 작업이 다 끝났다면 

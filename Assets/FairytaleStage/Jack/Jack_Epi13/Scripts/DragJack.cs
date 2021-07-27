@@ -1,7 +1,7 @@
 /*
  * - Name : Movement_Giant.cs
  * - Writer : 이윤교
- * - Content : 잭과콩나무 에피소드13 - 잭 원하는 위치로 드래그하는 스크립트
+ * - Content : 잭과콩나무 에피소드13 - 거인을 피하기 위해 잭을 문으로 드래그하는 스크립트
  * 
  * - HISTORY
  * 2021-07-14 : 초기 개발
@@ -21,7 +21,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//잭을 원하는 위치로 드래그하는 함수
+//거인을 피하기 위해 잭을 문으로 드래그하는 함수
 public class DragJack : MonoBehaviour{
     //오브젝트간 충돌이 일어날때 처음 한번만 호출되는 함수
     void OnTriggerEnter2D(Collider2D cCollideObject){

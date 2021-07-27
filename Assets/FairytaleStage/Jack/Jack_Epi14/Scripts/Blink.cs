@@ -14,15 +14,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blink : MonoBehaviour
-{
-
+public class Blink : MonoBehaviour{
     float mf_time; //깜빡거리는 속도
     float mf_timer;//현재 시간
     float mf_waitingTime; //원하는 시간 지정
     void Start(){
         mf_timer = 0.0f;
-        mf_waitingTime = 4f;
+        mf_waitingTime = 5f;
     }
     public void Update()
     {
