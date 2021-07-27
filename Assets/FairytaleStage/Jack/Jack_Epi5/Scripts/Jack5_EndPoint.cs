@@ -52,7 +52,7 @@ public class Jack5_EndPoint : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D cCollidObj)
     {
-        Destroy(cCollidObj.gameObject);
+        //Destroy(cCollidObj.gameObject);
         SceneManager.LoadScene("Jack_Epi6");
     }
 }

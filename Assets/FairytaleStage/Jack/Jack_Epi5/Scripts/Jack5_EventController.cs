@@ -187,7 +187,12 @@ public class Jack5_EventController : MonoBehaviour
             mvm_playVoice.playVoice(mn_EventSequence);
         }
 
-        
+        if (this.mg_Jack.GetComponent<CharacterMovesWhenDragging>().b_CheckMouseUp() == true)
+        {
+            mg_Jack.transform.position = new Vector3(-6.22f, -3.69f, 0);
+        }
+
+
         if (mg_Jack.GetComponent<CharacterMovesWhenDragging>().b_CheckDragging() == false && mn_EventSequence >= 6)
         {
             v_GenArrowToJack();

@@ -5,7 +5,7 @@
  * - Content
  * 오브젝트를 클릭후 드래그할 경우 해당 오브젝트가 이동되는 스크립트
  * 
- * - History -
+ * - History
  * 1. 2021-07-27 : 초안 작성
  *                  
  * - Variable 
@@ -15,14 +15,14 @@
  * mb_DragFlag                          Flag가 켜져있는동안에만 드래그 기능 활성화
  * mb_SoundFlag                         효과음이 한번만 나오게하기위한 Flag
  * mb_DraggingFlag                      오브젝트가 드래그중인지 확인하기 위한 Flag
- * 
+ * mb_MouseUpFlag                       오브젝트에서 손을 떼는 순간을 알기위한 Flag
  * - Function
  * OnMouseDrag()                        오브젝트를 드래그한 경우
  * OnMouseUp()                          오브젝트에서 손을 떼는 경우
  * v_ChangeDragFlagTrue()               오브젝트가 Drag 가능한 상태로 변경
  * v_ChangeDragFlagFalse()              오브젝트가 Drag 불가능한 상태로 변경
  * b_CheckDragging()                    오브젝트가 현재 드래그 중인지 확인하는 함수
- * 
+ * b_CheckMouseUp()                     오브젝트에서 손을 떼는순간 Flag값 True 반환해주는 함수
  */
 
 using System.Collections;
@@ -30,17 +30,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// 오브젝트 드래그시 효과음 및 마우스 포인터 위치에 따라 오브젝트가 이동하게끔 해주는 스크립트
+/// </summary>
 public class CharacterMovesWhenDragging : MonoBehaviour
 {
     private SoundManager msm_soundManager;
     private bool mb_DragFlag = true;                                                                                    // Flag가 켜져있는동안에만 드래그 기능 활성화
     private bool mb_SoundFlag = false;                                                                                  // 효과음이 한번만 나오게하기위한 Flag
     private bool mb_DraggingFlag = false;                                                                               // 오브젝트가 드래그중인지 확인하기 위한 Flag
-    
+    private bool mb_MouseUpFlag = false;
+
     // Start is called before the first frame update
     void Start()
     {
         msm_soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();                                // 효과음을 위해 SoundManager 오브젝트 연결
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //mb_MouseUpFlag = false;                                                                                         // 평상시 MouseUpFlag 값 False 유지
     }
 
     /// <summary>
@@ -73,6 +83,8 @@ public class CharacterMovesWhenDragging : MonoBehaviour
             msm_soundManager.playSound(1);                                                                              // 드래그 해제 시 효과음 재생
             mb_SoundFlag = false;
             mb_DraggingFlag = false;                                                                                    // 드래깅 상태 Flag값 False
+            mb_MouseUpFlag = true;
+            Invoke("v_ChangeMouseUpFalgFalse", 0.5f);
         }
     }
     
@@ -97,5 +109,17 @@ public class CharacterMovesWhenDragging : MonoBehaviour
     public bool b_CheckDragging()
     {
         return mb_DraggingFlag;
+    }
+    /// <summary>
+    /// 오브젝트에서 손을 떼는순간 Flag값 True 반환해주는 함수
+    /// </summary>
+    /// <returns>오브젝트에서 손을떼는순간 True반환 아니면 False</returns>
+    public bool b_CheckMouseUp()
+    {
+        return mb_MouseUpFlag;
+    }
+    public void v_ChangeMouseUpFalgFalse()
+    {
+        mb_MouseUpFlag = false;
     }
 }
