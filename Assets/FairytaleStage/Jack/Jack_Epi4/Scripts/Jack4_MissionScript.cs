@@ -1,38 +1,33 @@
 ﻿/*
- * - Name : Jack4_MissionScript.cs
+ * - Name : Jack4_MainScript.cs
  * - Writer : 김명현
- * - Content : 잭과콩나무 에피소드4 - 미션 스크립트(나레이션) 관리 스크립트
  * 
- *             -사용법-
- *            1. ms_ScriptText 에 문장들을 입력한다.
- *            2. 구분자는 @로 해두었으니 구분자를 추가해준다.
- *            3. 로그를 통해 제대로 나뉘었는지 확인한다.
- *            4. v_NextScript()를 통해 다음 스크립트를 출력할수 있다.
- *            5. v_NoneScript()를 통해 스크립트내용을 공백으로 설정할수 있다.
- *            
- *            
- *            
- *            -작성 기록-
- *            2021-07-14 : 제작 완료
- *            
- *            
- *            
+ * - Content :
+ * 잭과콩나무 에피소드4 - 미션 스크립트(대사) 관리 스크립트
  * 
- * -Variable 
- * mg_EventScript : 스크립트를 보여주는 메인 스크립트 오브젝트
- * ms_ScriptText : 스크립트를 통으로 넣어주는 스트링
- * msa_SplitText[] : 구분자를 기준으로 여기에 나눠서 저장된다.
- * n_i : for문용 변수
- * mn_Sequence : 스크립트 읽을 순서 변수
+ * - Update Log -
+ * 2021-07-14 : 제작 완료
+ * 2021-07-23 : 주석 변경
  * 
+ * - 사용법
+ * 1. ms_ScriptText 에 문장들을 입력한다.
+ * 2. 구분자는 @로 해두었으니 구분자를 추가해준다.
+ * 3. 로그를 통해 제대로 나뉘었는지 확인한다.
+ * 4. v_NextScript()를 통해 다음 스크립트를 출력할수 있다.
+ * 5. v_NoneScript()를 통해 스크립트내용을 공백으로 설정할수 있다.
+ *                    
+ * - Variable 
+ * mg_MainScript                    스크립트를 보여주는 메인 스크립트 오브젝트
+ * ms_ScriptText                    스크립트를 통으로 넣어주는 스트링
+ * msa_SplitText[]                  구분자를 기준으로 여기에 나눠서 저장된다.
+ * n_i                              for문용 변수
+ * mn_Sequence                      스크립트 읽을 순서 변수
  * 
- * -Function
- * v_NoneScript() : 스크립트를 공백으로 설정해준다.
- * v_NextScript() : 다음 스크립트를 보여준다.
- * 
+ * - Function
+ * v_NoneScript()                   스크립트를 공백으로 설정해준다.
+ * v_NextScript()                   다음 스크립트를 입력한다.
  * 
  */
-
 
 using System.Collections;
 using System.Collections.Generic;
@@ -48,7 +43,6 @@ public class Jack4_MissionScript : MonoBehaviour
     private string[] msa_SplitText;
     private int mn_Sequence;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -63,19 +57,18 @@ public class Jack4_MissionScript : MonoBehaviour
         mn_Sequence = -1;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //스크립트내용을 공백으로 설정해줌
+    #region 함수 선언부
+    /// <summary>
+    /// 스크립트 내용을 공백으로 해주는 함수
+    /// </summary>
     public void v_NoneScript()
     {
         this.mg_EventScript.GetComponent<Text>().text = "";
     }
 
-    //다음 스크립트를 보여준다.
+    /// <summary>
+    /// 다음 스크립트 내용을 출력해주는 함수
+    /// </summary>
     public void v_NextScript()
     {
         mn_Sequence += 1;
@@ -90,4 +83,5 @@ public class Jack4_MissionScript : MonoBehaviour
             Debug.Log("미션 스크립트 크기 초과");
         }
     }
+    #endregion
 }

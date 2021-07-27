@@ -1,45 +1,35 @@
 ﻿/*
- * - Name : Jack4_MissionScript.cs
+ * - Name : Jack4_MouseDrag.cs
  * - Writer : 김명현
- * - Content : 잭과콩나무 에피소드4 - 마우스 드래그 스크립트
- *            오브젝트를 드래그할 경우 마우스포인트따라 객체 이동
  * 
- *            
- *            
- *            
- *            -작성 기록-
- *            2021-07-14 : 제작 완료
- *            
- *            
- *            
+ * - Content
+ * 잭과콩나무 에피소드4 - 마우스 이벤트 스크립트
+ * 마우스 드래그시 오브젝트가 따라 움직이게 수정
+ * 마우스에서 손을 뗄 경우 오브젝트 원래위치로 이동
  * 
+ * - Update Log -
+ * 2021-07-13 : 작성 완료
+ * 2021-07-23 : 주석변경
+ *                  
  * - Variable 
- * mv2_mouseDragPosition
- * mv2_worldObjectPosition
- * mb_flag : 원하는시점에 드래그를 활성화하기 위한 flag
- * mb_BeanPositionFlag : flag를 통해 콩의 위치를 다르게 설정
- * 
- * - Function
- * 
- * 마우스 조작 함수
- * OnMouseDown() : touch the object
- * OnMouseDrag() : drag
- * OnMouseUp() : When you take your hands off the mouse.
- * 
- * 플래그 설정 함수
- * v_ChangeFlagTrue()
- * v_ChangeFlagTrue()
- * 
- * 
+ * mv2_mouseDragPosition                마우스 위치를 저장하는 벡터
+ * mv2_worldObjectPosition              카메라의 월드좌표로 변환을 위한 벡터
+ * mb_flag                              원하는시점에 드래그를 활성화하기 위한 flag
+ * - Function()
+ * OnMouseDrag()                        오브젝트를 드래그한 경우
+ * OnMouseUp()                          오브젝트에서 손을 떼는 경우
+ * v_ChangeFlagTrue()                   Flag 값 True
+ * v_ChangeFlagTrue()                   Flag 값 False
  */
-
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
+/// <summary>
+/// 마우스 조작관련 이벤트를 처리해주는 스크립트
+/// </summary>
 public class Jack4_MouseDrag : MonoBehaviour
 {
     private bool mb_flag;
@@ -57,18 +47,9 @@ public class Jack4_MouseDrag : MonoBehaviour
         PlayOnce = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnMouseDown()
-    {
-
-    }
-
-    //드래그할 경우 마우스위치따라 오브젝트 이동
+    /// <summary>
+    /// 오브젝트를 드래그한 경우 오브젝트가 마우스 위치따라 이동
+    /// </summary>
     private void OnMouseDrag()
     {
         if (mb_flag == true)
