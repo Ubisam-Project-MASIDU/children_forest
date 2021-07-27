@@ -1077,7 +1077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mg_targetPosition: {fileID: 1682142886}
-  sc: {fileID: 0}
+  sc: {fileID: 1119427097}
 --- !u!212 &1654862087
 SpriteRenderer:
   m_ObjectHideFlags: 0
