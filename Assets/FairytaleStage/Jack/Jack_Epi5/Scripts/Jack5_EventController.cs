@@ -1,72 +1,59 @@
 ﻿/*
  * - Name : Jack5_EventController.cs
  * - Writer : 김명현
- * - Content : 잭과콩나무 에피소드4 - 이벤트 관리 스크립트
- *            게임진행 이벤트를 총괄적으로 관리하기 위한 스크립트
  * 
- *            
- *            
- *            
- *            
- *            -작성 기록-
- *            2021-07-14 : 제작 완료
- *            
- *            
- *            
+ * - Content :
+ * 잭과콩나무 에피소드5 - 이벤트 관리 스크립트
+ * 게임진행 이벤트를 총괄적으로 관리하기 위한 스크립트
  * 
- * -Variable 
+ * - Update Log -
+ * 1. 2021-07-14 : 제작 완료
+ * 2. 2021-07-16 : 화살표 기능 추가 및 인코딩형식 변경
+ * 3. 2021-07-23 : 음성기능 추가 및 주석 작성
+ * 4. 2021-07-27 : 중복되는 스크립트 정리
  * 
- * 게임 디렉터 오브젝트에 접근하기 위한 오브젝트
- * mg_ScriptManager
- * 
- * 잭 말풍선 관련 오브젝트
- * mg_GenJackSpeechBubble
- * mg_JackSpeech
- * 
- * 이벤트 관리 변수
- * mb_EventFlag : 이벤트를 한번만 작동하기 위한 flag
- * mn_EventSequence : 이벤트 순서를 관리하는 변수
- * 
- * 마우스 드래그 관련 오브젝트
- * mg_Bean
- * 
- * 마우스 클릭 제한 flag
- * StopClickFlag
- * 
- * 이벤트 성공확인을 위한 flag
+ * - Variable 
+ * mg_GameDirector                  오브젝트 연결을 위한 변수 -> 게임 디렉터 오브젝트에 접근하기 위한 변수
+ * mg_Jack                          오브젝트 연결을 위한 변수 -> Jack 오브젝트에 접근하기 위한 변수
+ * mvm_playVoice                    오브젝트 연결을 위한 변수 -> VoiceManager 오브젝트에 접근하기 위한 변수
+ * mg_GenJackSpeechBubble           말풍선 관련 변수 -> Jack 말풍선 프리팹과 연결을 위한 변수
+ * mg_JackSpeech                    말풍선 관련 변수 -> Jack 말풍선 프리팹과 연결을 위한 변수
+ * mb_EventFlag                     이벤트 관리를 위한 변수 -> 같은 이벤트 반복을 피하기 위한 Flag
+ * mn_EventSequence                 이벤트 관리를 위한 변수 -> 이벤트 순서를 관리하는 변수
  * 
  * 
- * -Function
- * 
- * Flag 변경 함수
- * v_ChangeFlagFalse()
- * v_ChangeFlagTrue()
- * 
- * 메인 스크립트 함수
- * v_NextMainScript()
- * v_NoneMainScript()
- * 
- * 이벤트 스크립트 함수
- * v_NextEventScript()
- * v_NoneEventScript()
- * 
- * 잭 스크립트 함수
- * v_NextJackScript()
- * v_NoneJackScript()
  * 
  * 
- * 말풍선 생성 함수
- * v_GenJackSpeechBubble()
  * 
- * 말풍선 삭제 함수
- * v_RemoveJackSpeechBubble()
  * 
- * 드래그 활성화
- * v_TurnOnMouseDrag()
+ * mg_Mother                        오브젝트 연결을 위한 변수 -> 어머니 오브젝트에 접근하기 위한 변수
+ * mg_Bean                          오브젝트 연결을 위한 변수 -> 콩 오브젝트 연결하기 위한 변수
+ * mg_GenMotherSpeechBubble         말풍선 관련 변수 -> 어머니 말풍선 프리팹과 연결을 위한 변수 
+ * mg_MotherSpeech                  말풍선 관련 변수 -> 어머니 말풍선 프리팹과 연결을 위한 변수
+ * mb_DontLoopEvent1                이벤트 관리를 위한 변수 -> 같은 이벤트 반복을 피하기 위한 Flag
+ * mb_DontLoopEvent2                이벤트 관리를 위한 변수 -> 같은 이벤트 반복을 피하기 위한 Flag
+ * mb_IsDragBean                    이벤트 관리를 위한 변수 -> 콩 오브젝트가 드래그중인지 확인하기위한 Flag
+ * mb_StopClickFlag                 이벤트 관리를 위한 변수 -> 클릭으로 다음 이벤트로 넘어가는 것을 방지하기위한 Flag
+ * mb_BeanToMother                  이벤트 관리를 위한 변수 -> 콩이 어머니에게 전달되었는지 확인하기위한 Flag
+ * mb_BeanToWindow                  이벤트 관리를 위한 변수 -> 콩이 창문에게 전달되었는지 확인하기위한 Flag
+ * mb_PlaySound                     이벤트 관리를 위한 변수 -> 처음 씬이 실행될때 음성이 한번만 나오기 위한 Flag
+ * mg_ArrowToBean                   화살표 관련 변수 -> Jack의 콩을 가르키는 변수
+ * mg_ArrowToMother                 화살표 관련 변수 -> 어머니를 가르키는 변수
+ * mg_ArrowToBean2                  화살표 관련 변수 -> 어머니의 콩을 가르키는 변수
+ * mg_ArrowToWindow                 화살표 관련 변수 -> 창문을 가르키는 화살표 변수
+ * mg_ArrowPrefab                   화살표 관련 변수 -> 화살표 프리팹 연결을 위한 변수
  * 
- * 드래그 비활성화
- * v_TurnOFFMouseDrag()
- * 
+ * - Function
+ * v_ChangeFlagFalse()              Flag 변경 함수 -> False로 설정
+ * v_ChangeFlagTrue()               Flag 변경 함수 -> True로 설정
+ * v_NextMainScript()               메인 스크립트 함수 -> 다음 메인 스크립트를 출력
+ * v_NoneMainScript()               메인 스크립트 함수 -> 메인 스크립트 내용을 지워 아무것도 출력안되게 설정
+ * v_NextEventScript()              이벤트 스크립트 함수 -> 다음 이벤트 스크립트를 출력
+ * v_NoneEventScript()              이벤트 스크립트 함수 -> 이벤트 스크립트 내용을 지워 아무것도 출력안되게 설정
+ * v_NextJackScript()               잭 스크립트 함수 -> 다음 Jack 스크립트를 출력
+ * v_NoneJackScript()               잭 스크립트 함수 -> Jack 스크립트 내용을 지워 아무것도 출력안되게 설정
+ * v_NextMotherScript()             어머니 스크립트 함수 -> 다음 어머니 스크립트를 출력
+ * v_NoneMotherScript()             어머니 스크립트 함수 -> 어머니 스크립트 내용을 지워 아무것도 출력안되게 설정
  * 
  * 
  */
@@ -80,22 +67,21 @@ using UnityEngine.UI;
 
 public class Jack5_EventController : MonoBehaviour
 {
-    //게임 디렉터 오브젝트에 접근하기 위한 오브젝트
-    GameObject mg_ScriptManager;
+    //오브젝트 연결을 위한 변수 선언
+    GameObject mg_GameDirector;
+    GameObject mg_Jack;
+    VoiceManager mvm_playVoice;
 
-    //잭 말풍선 관련 오브젝트
+    // 말풍선 관련 변수
     GameObject mg_GenJackSpeechBubble;
     public GameObject mg_JackSpeech;
 
     //이벤트 관리를 위한 변수
     private bool mb_EventFlag;  //이벤트를 한번만 작동하기 위한 flag
     private int mn_EventSequence;   //이벤트 순서를 관리하는 변수
-    private bool mb_DragFlag;
-    VoiceManager mvm_playVoice;
+    
     private bool mb_PlaySound;
 
-    //마우스 드래그 관련 오브젝트
-    GameObject mg_Jack;
 
     //마우스 클릭 제한
     private bool StopClickFlag;
@@ -113,7 +99,7 @@ public class Jack5_EventController : MonoBehaviour
     void Start()
     {
         //오브젝트 연결
-        this.mg_ScriptManager = GameObject.Find("GameDirector");
+        this.mg_GameDirector = GameObject.Find("GameDirector");
         this.mg_Jack = GameObject.Find("Jack");
         this.mvm_playVoice = GameObject.Find("VoiceManager").GetComponent<VoiceManager>();
 
@@ -124,7 +110,6 @@ public class Jack5_EventController : MonoBehaviour
         //이벤트 관련
         v_ChangeFlagFalse();
         mn_EventSequence = 0;
-        mb_DragFlag = false;
 
 
         //이벤트 시작
@@ -202,16 +187,18 @@ public class Jack5_EventController : MonoBehaviour
             mvm_playVoice.playVoice(mn_EventSequence);
         }
 
-        if (mb_DragFlag == false && mn_EventSequence >= 6)
+        
+        if (mg_Jack.GetComponent<CharacterMovesWhenDragging>().b_CheckDragging() == false && mn_EventSequence >= 6)
         {
             v_GenArrowToJack();
             v_RemoveArrowToEndPoint();
         }
-        else if (mb_DragFlag == true && mn_EventSequence >= 6)
+        else if (mg_Jack.GetComponent<CharacterMovesWhenDragging>().b_CheckDragging() == true && mn_EventSequence >= 6)
         {
             v_RemoveArrowToJack();
             v_GenArrowToEndPoint();
         }
+        
     }
 
 
@@ -228,31 +215,31 @@ public class Jack5_EventController : MonoBehaviour
     //메인 스크립트 함수
     private void v_NextMainScript()
     {
-        this.mg_ScriptManager.GetComponent<Jack5_MainScript>().v_NextScript();
+        this.mg_GameDirector.GetComponent<ScriptManager>().v_NextScript(0);
     }
     private void v_NoneMainScript()
     {
-        this.mg_ScriptManager.GetComponent<Jack5_MainScript>().v_NoneScript();
+        this.mg_GameDirector.GetComponent<ScriptManager>().v_NoneScript(0);
     }
 
     //이벤트 스크립트 함수
     private void v_NextEventScript()
     {
-        this.mg_ScriptManager.GetComponent<Jack5_MissionScript>().v_NextScript();
+        this.mg_GameDirector.GetComponent<ScriptManager>().v_NextScript(0);
     }
     private void v_NoneEventScript()
     {
-        this.mg_ScriptManager.GetComponent<Jack5_MissionScript>().v_NoneScript();
+        this.mg_GameDirector.GetComponent<ScriptManager>().v_NoneScript(0);
     }
     
     //잭 스크립트 함수
     private void v_NextJackScript()
     {
-        this.mg_ScriptManager.GetComponent<Jack5_JackScript>().v_NextScript();
+        this.mg_GameDirector.GetComponent<ScriptManager>().v_NextScript(1);
     }
     private void v_NoneJackScript()
     {
-        this.mg_ScriptManager.GetComponent<Jack5_JackScript>().v_NoneScript();
+        this.mg_GameDirector.GetComponent<ScriptManager>().v_NoneScript(1);
     }
 
     //말풍선 생성 함수
@@ -265,20 +252,20 @@ public class Jack5_EventController : MonoBehaviour
     //말풍선 삭제 함수
     private void v_RemoveJackSpeechBubble()
     {
-        this.mg_ScriptManager.GetComponent<Jack5_JackScript>().v_NoneScript();
+        this.mg_GameDirector.GetComponent<ScriptManager>().v_NoneScript(1);
         Destroy(this.mg_GenJackSpeechBubble);
     }
 
     //드래그 활성화
     private void v_TurnOnMouseDrag()
     {
-        this.mg_Jack.GetComponent<Jack5_MouseDrag>().v_ChangeFlagTrue();
+        this.mg_Jack.GetComponent<CharacterMovesWhenDragging>().v_ChangeDragFlagTrue();
     }
 
     //드래그 비활성화
     private void v_TurnOFFMouseDrag()
     {
-        this.mg_Jack.GetComponent<Jack5_MouseDrag>().v_ChangeFlagFalse();
+        this.mg_Jack.GetComponent<CharacterMovesWhenDragging>().v_ChangeDragFlagFalse();
     }
 
     public void v_GenArrowToJack()
@@ -316,12 +303,5 @@ public class Jack5_EventController : MonoBehaviour
         }
     }
 
-    public void v_DragFalgTrue()
-    {
-        mb_DragFlag = true;
-    }
-    public void v_DragFalgFalse()
-    {
-        mb_DragFlag = false;
-    }
+
 }
