@@ -10,12 +10,14 @@ public class FadeOut : MonoBehaviour
     public double fadeOutSeconds = 1.0;
     bool isFadeOut = true;
     double fadeDeltaTime = 0;
+    private double md_checkVolumn;
 
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        
+        md_checkVolumn = audioSource.volume;
+        Debug.Log(md_checkVolumn.ToString());
     }
 
     // Update is called once per frame
@@ -29,7 +31,7 @@ public class FadeOut : MonoBehaviour
                 fadeDeltaTime = fadeOutSeconds;
                 isFadeOut = false;
             }
-            audioSource.volume = (float)(1.0 - (fadeDeltaTime / fadeOutSeconds));
+            audioSource.volume = (float)(md_checkVolumn - (fadeDeltaTime / fadeOutSeconds));
         }
     }
 }
