@@ -4,8 +4,8 @@
  * - Content : BGMmanager 클래스에서는 이름에서와 같이 씬에 필요한 BGM 사운드를 출력하도록 설계하였다.
  * - Where the code is applied : for any scenes to need making a BGM sound...
  * - History -
- * 2021-07-19 : 제작 완료
- * 2021-07-20 : 주석 처리
+ * 2021-07-23 : 제작 완료
+ * 2021-07-23 : 주석 처리
  * 2021-07-27 : 피드백에 의한 주석 변경.
  *
  * - BGMmanager Member Variable 
