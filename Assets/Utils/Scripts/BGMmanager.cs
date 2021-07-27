@@ -2,7 +2,7 @@
  * - Name : BGMmanager.cs
  * - Writer : 최대준
  * - Content : BGMmanager 클래스에서는 이름에서와 같이 씬에 필요한 BGM 사운드를 출력하도록 설계하였다.
- * - Where the code is applied : for any scenes to need making a sound...
+ * - Where the code is applied : for any scenes to need making a BGM sound...
  * - History -
  * 2021-07-19 : 제작 완료
  * 2021-07-20 : 주석 처리
