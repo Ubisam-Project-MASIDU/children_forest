@@ -19,6 +19,8 @@
  * mf_timer : 경과 시간
  * mf_waitingTime : 특정 시간
  * mb_checkPlayOnce : 스크립트 음성이 한번만 실행되게 하기 위한 체크하는 변수
+ *
+ * <Fucntion> 
  * MoveTowards() : 등속 이동, 매개변수로 {현재위치, 목표위치, 속도}를 입력  
  * OnTriggerEnter2D(Collider2D cCollideObject) :오브젝트간 충돌이 일어날때 처음 한번만 호출되는 함수
  */
