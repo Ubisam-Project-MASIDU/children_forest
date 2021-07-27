@@ -26,7 +26,7 @@
 ***
 
 
-- FruitPutIn 구성 정보
+- Puzzle 구성 정보
   - Sprites
     - 씬에 사용되는 이미지들 및 효과음 저장
   - Scripts
