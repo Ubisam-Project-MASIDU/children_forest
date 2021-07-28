@@ -109,8 +109,22 @@
 > Provided by 모두의 브금-UmbrTone
 > 
 > Video Link: https://youtu.be/tGSlgwJgGRc
->  
+
+> 곡정보 : 오정석-My Mistake
+>
+> 출처 및 저작권표시 - 공유마당, CC BY
+> 
+> 링크: https://youtu.be/8tNyIBROG6M
+> 
+> 𝐌𝐮𝐬𝐢𝐜 𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 : https://youtu.be/jwG_0EdnkzA
+
+> Song : 제이오(J.O) - 요리시간
+>
+> Follow Artist : https://www.youtube.com/user/ttuii12345
+>
+> Music promoted by DayDreamSound : https://youtu.be/yadnMyOUv-c
 -------------
 ## README.md Change history
 > ##### *2021.7.19 최대준 create*
 > ##### *2021.7.26 이윤교 update*
+> ##### *2021.7.28 이윤교 update*
