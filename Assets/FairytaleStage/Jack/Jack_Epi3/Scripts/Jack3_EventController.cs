@@ -11,6 +11,7 @@
  * 2021-07-16 : 화살표 기능 추가 및 인코딩형식 변경
  * 2021-07-21 : 주석 변경
  * 2021-07-23 : 음성기능 추가 및 주석 작성
+ * 2021-07-28 : 코드 간결화 및 일부기능 모듈화
  * 
  * - Variable 
  * mg_ScriptManager                 게임 디렉터 오브젝트에 접근하기 위한 변수
@@ -57,6 +58,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// 전체적인 이벤트를 관리하는 스크립트
+/// </summary>
 public class Jack3_EventController : MonoBehaviour
 {
     #region 변수 선언부
