@@ -35,7 +35,7 @@ public class Puzzle_Matching_Puzzle : MonoBehaviour{
     }
     void Update(){
         if(!mb_classifyWhetherAns){                                                                              // 매칭 되지 못할 경우
-            transform.position = Vector3.MoveTowards(this.transform.position, mv2_initPos, 2f * Time.deltaTime); //처음 지정된 랜덤자리로 다시 되돌아감.
+            transform.position = Vector3.MoveTowards(this.transform.position, mv2_initPos, 10f * Time.deltaTime); //처음 지정된 랜덤자리로 다시 되돌아감.
         }
     }
     void OnTriggerStay2D(Collider2D cCollideObject){
