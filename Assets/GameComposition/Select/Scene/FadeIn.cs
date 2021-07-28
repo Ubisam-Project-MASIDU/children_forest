@@ -37,7 +37,6 @@ public class FadeIn : MonoBehaviour {
     void Start() {
         mas_playBGM = GetComponent<AudioSource>();
         md_checkVolumn = mas_playBGM.volume;
-        Debug.Log(md_checkVolumn.ToString());
     }
 
 // 볼륨을 서서히 높인다.

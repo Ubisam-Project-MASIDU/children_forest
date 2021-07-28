@@ -69,6 +69,9 @@ public struct VoiceInfo {
 }
 
 // 씬에서 음성을 출력하는 게임오브젝트에 적용되는 VoiceManager 클래스이다.
+/// <summary>
+/// 씬에 VoiceManager의 인스펙터 창에서 설정한 음성 세팅값을 playVoice 함수를 통해 씬에 출력해주도록 도와주는 클래스.
+/// </summary>
 public class VoiceManager : MonoBehaviour {
     public VoiceInfo[] mvifl_setVoiceInfoList;
     public GameObject mc_loadingScene;
@@ -101,7 +104,6 @@ public class VoiceManager : MonoBehaviour {
             mvifl_setVoiceInfoList[mn_checkCurInx].sac_voiceAudioClip = ac_createAudioClip;
 
             mn_checkCurInx++;
-            Debug.Log("queue data response index : " + mn_checkCurInx);
         }
         if(mn_checkCurInx == mvifl_setVoiceInfoList.Length) {
             Destroy(mgo_loadingScene);
@@ -124,11 +126,19 @@ public class VoiceManager : MonoBehaviour {
     }
 
     // 이 함수를 통해 저장했고 해당되는 AudioClip을 씬에 출력하게 된다. 
+    /// <summary>
+    /// 설정한 음성을 씬에 출력하는 함수.
+    /// </summary>
+    /// <param name="nPlayVoiceClipId">인스펙터 창에서 설정한 음성의 인덱스 값.</param>
     public void playVoice(int nPlayVoiceClipId) {
         mas_playVoice.PlayOneShot(mvifl_setVoiceInfoList[nPlayVoiceClipId].sac_voiceAudioClip);
     }
 
     // 음성이 출력되는지 확인, 출력되고 있다면 true, 출력되지 않고 있다면 false.
+    /// <summary>
+    /// 해당 씬의 VoiceManager 오브젝트의 컴포넌트 AudioSource에 음성이 출력되고 있는지 확인해주는 함수.
+    /// </summary>
+    /// <returns> 출력중이면 true, 아니라면 false 값 반환. </returns>
     public bool isPlaying() {
         return mas_playVoice.isPlaying;
     }

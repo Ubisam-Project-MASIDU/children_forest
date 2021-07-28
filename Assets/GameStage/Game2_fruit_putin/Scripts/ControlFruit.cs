@@ -8,6 +8,7 @@
  * 2021-07-20 : 주석 처리
  * 2021-07-23 : SoundManager 추가.
  * 2021-07-27 : 피드백에 의한 주석 변경.
+ * 2021-07-28 : 생성하자마자 파괴될때 mvm_voiceManager가 null값일 경우의 예외처리.
  *
  * - ControlFruit Member Variable 
  *
@@ -78,9 +79,9 @@ public class ControlFruit : MonoBehaviour {
 
     // Fruit와 Basket의 충돌이 일어났을 때 호출되는 함수로, 여기서는 Fruit를 사라지게하고, 영어로 된 음성을 출력하도록 하였다.
     void OnTriggerEnter2D(Collider2D cCollideObject) {
-        if (cCollideObject.tag == "PutFruitInBasket")
-        {
-            mvm_voiceManager.playVoice(mn_fruitId+1); //영어
+        if (cCollideObject.tag == "PutFruitInBasket") {
+            if(mvm_voiceManager != null)
+                mvm_voiceManager.playVoice(mn_fruitId+1); //영어
             Destroy(this.gameObject);
         }
     }
