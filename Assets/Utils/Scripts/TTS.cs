@@ -143,7 +143,6 @@ public class TTS {
     private string TextToSpeechPost(object oSendData) {
         //use JsonUtility. convert byte[] to send this string..
         string s_useJsonUTempStr = JsonUtility.ToJson(oSendData);
-        Debug.Log(s_useJsonUTempStr);
         var b_checkbytesOftempStr = System.Text.Encoding.UTF8.GetBytes(s_useJsonUTempStr);
 
         //set address to request..
@@ -166,19 +165,15 @@ public class TTS {
             StreamReader sr_ReadStream = new StreamReader(hwr_receiveResponse.GetResponseStream());
             //convert stream data to string format.
             string s_outputJson = sr_ReadStream.ReadToEnd();
-            Debug.Log(s_outputJson);
             return s_outputJson;
         }
-        catch (WebException e){
-            using (WebResponse response = e.Response)
-            {
+        catch (WebException e) {
+            using (WebResponse response = e.Response) {
                 HttpWebResponse httpResponse = (HttpWebResponse) response;
                 Debug.Log(httpResponse.StatusCode);
                 using (Stream data = response.GetResponseStream())
-                using (var reader = new StreamReader(data))
-                {
+                using (var reader = new StreamReader(data)) {
                     string text = reader.ReadToEnd();
-                    Debug.Log(text);
                 }
             }
             return null;
