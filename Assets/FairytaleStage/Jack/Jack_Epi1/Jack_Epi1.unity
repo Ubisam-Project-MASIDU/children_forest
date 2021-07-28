@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66bc243e553dd4961b629f2de5616829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeInSeconds: 2
+  md_fadeInSeconds: 1
 --- !u!82 &1052357013
 AudioSource:
   m_ObjectHideFlags: 0
@@ -501,11 +501,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 30618786458484ebe98e8caa142bf7df, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 58a000252af784a4a8f8a8df7f086980, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.3
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1007,8 +1007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2bedc9b1c004c2bac24001a1606118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ms_loadScene: Jack_Epi2
-  mb_playOnce: 0
+  ms_LoadScene: Jack_Epi2
+  mb_PlayOnce: 0
 --- !u!61 &2119467761
 BoxCollider2D:
   m_ObjectHideFlags: 0
