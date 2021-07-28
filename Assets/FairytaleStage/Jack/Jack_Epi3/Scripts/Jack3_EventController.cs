@@ -32,25 +32,14 @@
  * mb_PlaySound                     씬이 시작되었을때 음성이 한번만 나오게 하기위한 Flag
  * 
  * - Function
- * v_ChangeFlagFalse()              Flag 변경 함수 -> False로 설정
- * v_ChangeFlagTrue()               Flag 변경 함수 -> True로 설정
- * v_NextMainScript()               메인 스크립트 함수 -> 다음 메인 스크립트를 출력
- * v_NoneMainScript()               메인 스크립트 함수 -> 메인 스크립트 내용을 지워 아무것도 출력안되게 설정
- * v_NextEventScript()              이벤트 스크립트 함수 -> 다음 이벤트 스크립트를 출력
- * v_NoneEventScript()              이벤트 스크립트 함수 -> 이벤트 스크립트 내용을 지워 아무것도 출력안되게 설정
- * v_NextJackScript()               잭 스크립트 함수 -> 다음 Jack 스크립트를 출력
- * v_NoneJackScript()               잭 스크립트 함수 -> Jack 스크립트 내용을 지워 아무것도 출력안되게 설정
- * v_NextGFScript()                 할아버지 스크립트 함수 -> 다음 할아버지 스크립트를 출력
- * v_NoneGFScript()                 할아버지 스크립트 함수 -> 할아버지 스크립트 내용을 지워 아무것도 출력안되게 설정
- * v_GenGFSpeechBubble()            말풍선 생성 함수 -> 할아버지 말풍선을 생성
- * v_GenJackSpeechBubble()          말풍선 생성 함수 -> Jack의 말풍선을 생성
- * v_RemoveGFSpeechBubble()         말풍선 삭제 함수 -> 할아버지 말풍선 삭제
- * v_RemoveJackSpeechBubble()       말풍선 삭제 함수 -> Jack의 말풍선 삭제
- * v_TurnOnMouseDrag()              드래그 활성화 -> 소, 콩 오브젝트 드래그 활성화
- * v_DragBean()                     드래그 활성화 -> 콩만 드래그 활성화
- * v_TurnOFFMouseDrag()             드래그 비활성화 -> 소, 콩 오브젝트 드래그 기능 잠금
- * v_BeanToJack()                   flag true 처리 함수 -> 콩이 Jack에게 전달됬다고 Flag값 True로 변경
- * v_CowToGF()                      flag true 처리 함수 -> 소가 할아버지에게 전달됬다고 Flag값 True로 변경
+ * v_ChangeFlagFalse()              Flag 변경 함수 -> 스토리 관련 이벤트가 한번만 작동되게 하기위한 Flag값 False로 변경
+ * v_ChangeFlagTrue()               Flag 변경 함수 -> 스토리 관련 이벤트가 한번만 작동되게 하기위한 Flag값 True로 변경
+ * v_TurnOnMouseDrag()              Flag 변경 함수 -> 오브젝트 드래그 활성화
+ * v_TurnOFFMouseDrag()             Flag 변경 함수 -> 오브젝트 드래그 비활성화
+ * v_NoneScript()                   스크립트(대사) 함수 -> 모든 텍스트값을 공백으로 설정하여 출력되는 스크립트(대사)를 없게끔 설정, 생성된 말풍선들 모두 삭제
+ * v_NextMainScript()               스크립트(대사) 함수 -> 다음 스크립트(대사)를 메인 스크립트 위치에 출력
+ * v_NextJackScript()               스크립트(대사) 함수 -> 다음 스크립트(대사)를 Jack 스크립트 위치에 출력 및 Jack 말풍선 생성
+ * v_NextGFScript()                 스크립트(대사) 함수 -> 다음 스크립트(대사)를 할아버지 스크립트 위치에 출력 및 할아버지 말풍선 생성
  * v_GenArrowToBean()               화살표 관련 함수 -> 콩을 가르키는 화살표 생성
  * v_GenArrowToCow()                화살표 관련 함수 -> 소를 가르키는 화살표 생성
  * v_GenArrowToGF()                 화살표 관련 함수 -> 할아버지를 가르키는 화살표 생성
@@ -59,10 +48,6 @@
  * v_RemoveArrowToJack()            화살표 관련 함수 -> Jack을 가르키는 화살표 삭제
  * v_RemoveArrowToBean()            화살표 관련 함수 -> 콩을 가르키는 화살표 삭제
  * v_RemoveArrowToCow()             화살표 관련 함수 -> 소를 가르키는 화살표 삭제
- * v_DragCow()                      드래그 관련 함수 -> 소가 드래그 상태임을 나타내는 Flag값 True
- * v_NotDragCow()                   드래그 관련 함수 -> 소가 드래그 상태임을 나타내는 Flag값 False
- * v_DragBeanFlagTrue()             드래그 관련 함수 -> 콩이 드래그 상태임을 나타내는 Flag값 True
- * v_DragBeanFalgFalse()            드래그 관련 함수 -> 콩이 드래그 상태임을 나타내는 Flag값 False
  * 
  */
 
@@ -96,13 +81,9 @@ public class Jack3_EventController : MonoBehaviour
     public GameObject mg_JackSpeech;                                                                // 잭 말풍선 프리팹과 연결을 위한 변수
 
     // 이벤트 관련 Flag 선언
-    private bool mb_EventFlag;                                                                      // 이벤트를 한번만 작동하기 위한 flag
-    private int mn_EventSequence;                                                                   // 이벤트 순서를 관리하는 변수
-    private bool mb_DragCowFlag;                                                                    // 소가 드래그 중인지 확인하기 위한 Flag
-    private bool mb_DragBeanFlag;                                                                   // 콩이 드래그 중인지 확인하기 위한 Flag
-    bool mb_BeanToJack;                                                                             // 콩이 Jack에게 전달이 됬는지 확인하기 위한 Flag
-    private bool mb_CowToGF;                                                                        // 소가 할아버지에게 전달이 됬는지 확인하기 위한 Flag
-    private bool mb_PlaySound;                                                                      // 처음 씬이 실행될때 음성이 한번만 나오기 위한 Flag
+    private bool mb_EventFlag = false;                                                              // 이벤트를 한번만 작동하기 위한 flag
+    private int mn_EventSequence = 0;                                                               // 이벤트 순서를 관리하는 변수
+    private bool mb_PlaySound = false;                                                              // 처음 씬이 실행될때 음성이 한번만 나오기 위한 Flag
     
     #endregion
 
@@ -112,19 +93,6 @@ public class Jack3_EventController : MonoBehaviour
         this.mg_Cow = GameObject.Find("Jack3_Cow");
         this.mg_Bean = GameObject.Find("Jack3_Bean");
         this.mvm_playVoice = GameObject.Find("VoiceManager").GetComponent<VoiceManager>();
-
-        // Flag값 False로 초기화
-        mb_BeanToJack = false;
-        mb_CowToGF = false;
-        mb_DragCowFlag = false;
-        mb_DragBeanFlag = false;
-        mb_PlaySound = false;
-        v_ChangeFlagFalse();
-
-        //첫 화면 설정
-        mn_EventSequence = 0;                                                                       // 이벤트 0부터 시작
-        v_NextMainScript();                                                                         // 메인 스크립트 출력
-        v_TurnOFFMouseDrag();                                                                       // 스크립트 중 드래그되는 상황 방지
     }
 
     void Update(){
@@ -134,71 +102,64 @@ public class Jack3_EventController : MonoBehaviour
             v_ChangeFlagTrue();
         }
 
-        // 미션 수행 정도에 따른 이벤트 처리
-        if (mb_CowToGF == true && mb_BeanToJack == true)                                            // 미션을 모두 해결하면 다음 씬으로 연결
-        {
-            SceneManager.LoadScene("Jack_Epi4");
-        }
-        else if(mb_CowToGF == true && mb_BeanToJack == false)                                       // 소가 할아버지에게 전달이 된 경우
-        {
-            this.mg_Bean.GetComponent<Jack3_MouseDrag>().v_ChangeFlagTrue();
-            v_NotDragCow();                                                                         // 소 드래그상태 해제
-        }
-        else if(mb_BeanToJack == true)                                                              // 콩이 Jack에게 전달 된 경우
-        {
-            v_DragBeanFalgFalse();                                                                  // 콩 드래그상태 해제
-        }
-
         //드래그 상태에 따른 화살표 이펙트 효과 처리 부분
-        if(mb_DragCowFlag == true && mn_EventSequence >= 8 && mb_DragBeanFlag == false)             // 소를 드래그 중인 경우
+        if (mg_Cow != null)
         {
-            v_RemoveArrowToCow();
-            if (mg_ArrowToGF == null)
-            {
-                v_GenArrowToGF();
-            }
-            if(mg_ArrowToBean != null)
-            {
-                v_RemoveArrowToBean();
-            }
-        }
-        else if(mb_DragCowFlag == false && mn_EventSequence >= 8 && mb_DragBeanFlag == false)       // 아무것도 드래그 상태가 아닌경우
-        {
-            v_RemoveArrowToGF();
-
-            if(this.mg_ArrowToCow == null && mn_EventSequence >= 8 && mb_CowToGF == false )
-            {
-                v_GenArrowToCow();
-            }
-            if (this.mg_ArrowToBean == null && mn_EventSequence >= 8 && mb_BeanToJack == false)
-            {
-                v_GenArrowToBean();
-            }
-        }
-        if(mb_DragBeanFlag == true && mn_EventSequence >= 8 && mb_DragCowFlag == false)             // 콩을 드래그 중인 경우
-        {
-            v_RemoveArrowToBean();
-            if(mg_ArrowToJack == null)
-            {
-                v_GenArrowToJack();
-            }
-            if(mg_ArrowToCow != null)
+            if (mg_Cow.GetComponent<CharacterMovesWhenDragging>().b_CheckDragging() == true)
             {
                 v_RemoveArrowToCow();
+                v_GenArrowToGF();
+                v_RemoveArrowToBean();
+            }
+            else if (mg_Bean != null)
+            {
+                if (mg_Bean.GetComponent<CharacterMovesWhenDragging>().b_CheckDragging() == true)
+                {
+                    v_RemoveArrowToBean();
+                    v_GenArrowToJack();
+                    v_RemoveArrowToCow();
+                }
+                else if (mn_EventSequence >= 8)
+                {
+                    v_RemoveArrowToGF();
+                    v_RemoveArrowToJack();
+                    if (mg_Cow != null)
+                        v_GenArrowToCow();
+                    if (mg_Bean != null)
+                        v_GenArrowToBean();
+                }
+            }
+            else if (mn_EventSequence >= 8)
+            {
+                v_RemoveArrowToGF();
+                v_RemoveArrowToJack();
+                if (mg_Cow != null)
+                    v_GenArrowToCow();
+                if (mg_Bean != null)
+                    v_GenArrowToBean();
             }
         }
-        else if(mb_DragBeanFlag == false && mn_EventSequence >= 8 && mb_DragCowFlag == false)       // 콩 드래그 해제한 경우
+        else if(mg_Bean != null)
         {
-            v_RemoveArrowToJack();
-
-            if (this.mg_ArrowToCow == null && mn_EventSequence >= 8 && mb_CowToGF == false)
+            if (mg_Bean.GetComponent<CharacterMovesWhenDragging>().b_CheckDragging() == true)
             {
-                v_GenArrowToCow();
+                v_RemoveArrowToBean();
+                v_GenArrowToJack();
+                v_RemoveArrowToCow();
             }
-            if (this.mg_ArrowToBean == null && mn_EventSequence >= 8 && mb_BeanToJack == false)
+            else if (mn_EventSequence >= 8)
             {
-                v_GenArrowToBean();
+                v_RemoveArrowToGF();
+                v_RemoveArrowToJack();
+                if (mg_Cow != null)
+                    v_GenArrowToCow();
+                if (mg_Bean != null)
+                    v_GenArrowToBean();
             }
+        }
+        else
+        {
+            SceneManager.LoadScene("Jack_Epi4");
         }
 
         //전체적인 이벤트
@@ -206,172 +167,145 @@ public class Jack3_EventController : MonoBehaviour
         {
             mb_PlaySound = true;
             mvm_playVoice.playVoice(mn_EventSequence);
+            v_NextMainScript();
+            v_TurnOFFMouseDrag();
         }
         if (mn_EventSequence == 1 && this.mb_EventFlag == true){                                    // 화면을 1번 터치하면 진행
-            v_ChangeFlagFalse();                                                                    // 이벤트를 한번만 실행하기위한 flag
-
-            v_NoneMainScript();                                                                     // 이전에 했던스크립트 정리
-
-            v_GenGFSpeechBubble();                                                                  // 스크립트, 말풍선 등 출력
+            v_ChangeFlagFalse();                                                                    // 이벤트를 한번만 실행하기위한 flag값 False로 변경
+            v_NoneScript();
             v_NextGFScript();
             mvm_playVoice.playVoice(mn_EventSequence);
         }
         else if (mn_EventSequence == 2 && mb_EventFlag == true){                                    // 화면을 2번 터치하면 진행
             v_ChangeFlagFalse();
-
-            v_RemoveGFSpeechBubble();
-
+            v_NoneScript();
             v_NextJackScript();
-            v_GenJackSpeechBubble();
             mvm_playVoice.playVoice(mn_EventSequence);
         }
         else if (mn_EventSequence == 3 && mb_EventFlag == true){                                    // 화면을 3번 터치하여 진행
             v_ChangeFlagFalse();
-
-            v_RemoveJackSpeechBubble();
-
-            v_GenGFSpeechBubble();
+            v_NoneScript();
             v_NextGFScript();
             mvm_playVoice.playVoice(mn_EventSequence);
         }
         else if (mn_EventSequence == 4 && mb_EventFlag == true){
             v_ChangeFlagFalse();
-
-            v_NextGFScript();
+            v_NoneScript();
+            Invoke("v_NextGFScript", 0.1f);
             mvm_playVoice.playVoice(mn_EventSequence);
         }
         else if (mn_EventSequence == 5 && mb_EventFlag == true){
             v_ChangeFlagFalse();
-
-            v_RemoveGFSpeechBubble();
-
+            v_NoneScript();
             v_NextMainScript();
             mvm_playVoice.playVoice(mn_EventSequence);
         }
         else if (mn_EventSequence == 6 && mb_EventFlag == true){
             v_ChangeFlagFalse();
-
-            v_NoneMainScript();
-
+            v_NoneScript();
             v_NextJackScript();
-            v_GenJackSpeechBubble();
             mvm_playVoice.playVoice(mn_EventSequence);
         }
         else if (mn_EventSequence == 7 && mb_EventFlag == true){
             v_ChangeFlagFalse();
-
-            v_RemoveJackSpeechBubble();
-
+            v_NoneScript();
             v_NextMainScript();
             mvm_playVoice.playVoice(mn_EventSequence);
         }
         else if (mn_EventSequence == 8 && mb_EventFlag == true)
         {
             v_ChangeFlagFalse();
-
-            v_NoneMainScript();
-            v_NextEventScript();
-
+            v_NoneScript();
+            v_NextMainScript();
             v_TurnOnMouseDrag();
-
             v_GenArrowToBean();
             v_GenArrowToCow();
             mvm_playVoice.playVoice(mn_EventSequence);
         }
     }
-
     #region 함수 선언부
 
     /// <summary>
-    /// Flag 변경 함수 - 스토리 관련 이벤트가 한번만 작동되게 하기위한 Flag
+    /// Flag 변경 함수 -> 스토리 관련 이벤트가 한번만 작동되게 하기위한 Flag값 False로 변경
     /// </summary>
     private void v_ChangeFlagFalse(){                                                                   
         this.mb_EventFlag = false;
     }
+    /// <summary>
+    /// Flag 변경 함수 -> 스토리 관련 이벤트가 한번만 작동되게 하기위한 Flag값 True로 변경
+    /// </summary>
     private void v_ChangeFlagTrue(){
         this.mb_EventFlag = true;
     }
-
     /// <summary>
-    /// 스크립트 관련 함수
-    /// </summary>
-    private void v_NextMainScript(){                                                                        // 다음 메인 스크립트를 출력
-        this.mg_ScriptManager.GetComponent<Jack3_MainScript>().v_NextScript();
-    }
-    private void v_NoneMainScript(){                                                                        // 메인 스크립트 내용을 지워 아무것도 출력안되게 설정
-        this.mg_ScriptManager.GetComponent<Jack3_MainScript>().v_NoneScript();
-    }
-    private void v_NextEventScript(){                                                                       // 다음 이벤트 스크립트 출력
-        this.mg_ScriptManager.GetComponent<Jack3_MissionScript>().v_NextScript();
-    }
-    private void v_NoneEventScript(){                                                                       // 이벤트 스크립트 내용을 지워 아무것도 출력안되게 설정
-        this.mg_ScriptManager.GetComponent<Jack3_MissionScript>().v_NoneScript();
-    }
-    private void v_NextJackScript(){                                                                        // 다음 Jack 스크립트 출력
-        this.mg_ScriptManager.GetComponent<Jack3_JackScript>().v_NextScript();
-    }
-    private void v_NoneJackScript(){                                                                        // Jack 스크립트 내용을 지워 아무것도 출력안되게 설정
-        this.mg_ScriptManager.GetComponent<Jack3_JackScript>().v_NoneScript();
-    }
-    private void v_NextGFScript(){                                                                          // 다음 할아버지 스크립트 출력
-        this.mg_ScriptManager.GetComponent<Jack3_GFScript>().v_NextScript();
-    }
-    private void v_NoneGFScript(){                                                                          // 할아버지 스크립트 내용을 지워 아무것도 출력안되게 설정
-        this.mg_ScriptManager.GetComponent<Jack3_GFScript>().v_NoneScript();
-    }
-
-    /// <summary>
-    /// 말풍선 관련 함수
-    /// </summary>
-    private void v_GenGFSpeechBubble(){                                                                     // 할아버지 말풍선을 생성
-        mg_GenGFSpeechBubble = Instantiate(mg_GFSpeech) as GameObject;
-        mg_GenGFSpeechBubble.transform.position = new Vector3(4, 0.5f, 0);
-    }
-    private void v_GenJackSpeechBubble(){                                                                   // 잭의 말풍선을 생성
-        mg_GenJackSpeechBubble = Instantiate(mg_JackSpeech) as GameObject;
-        mg_GenJackSpeechBubble.transform.position = new Vector3(-0.5f, -1, 0);
-    }
-    private void v_RemoveGFSpeechBubble(){                                                                  // 할아버지 말풍선 삭제
-        this.mg_ScriptManager.GetComponent<Jack3_GFScript>().v_NoneScript();
-        Destroy(this.mg_GenGFSpeechBubble);
-    }
-    private void v_RemoveJackSpeechBubble(){                                                                // Jack 말풍선 삭제
-        this.mg_ScriptManager.GetComponent<Jack3_JackScript>().v_NoneScript();
-        Destroy(this.mg_GenJackSpeechBubble);
-    }
-
-    /// <summary>
-    /// 드래그 기능 관련 함수
+    /// Flag 변경 함수 -> 오브젝트 드래그 활성화
     /// </summary>
     private void v_TurnOnMouseDrag()                                                                        // 드래그 활성화
     {
-        this.mg_Cow.GetComponent<Jack3_MouseDrag>().v_ChangeFlagTrue();
-        this.mg_Bean.GetComponent<Jack3_MouseDrag>().v_ChangeFlagTrue();
+        if (mg_Cow != null)
+            this.mg_Cow.GetComponent<CharacterMovesWhenDragging>().v_ChangeDragFlagTrue();
+        if (mg_Bean != null)
+            this.mg_Bean.GetComponent<CharacterMovesWhenDragging>().v_ChangeDragFlagTrue();
     }
-    public void v_DragBean()                                                                                // 콩 드래그 가능하게 설정
-    {
-        this.mg_Bean.GetComponent<Jack3_MouseDrag>().v_ChangeFlagTrue();
-    }
+    /// <summary>
+    /// Flag 변경 함수 -> 오브젝트 드래그 비활성화
+    /// </summary>
     private void v_TurnOFFMouseDrag()                                                                       // 드래그 기능 잠금
     {
-        this.mg_Cow.GetComponent<Jack3_MouseDrag>().v_ChangeFlagFalse();
-        this.mg_Bean.GetComponent<Jack3_MouseDrag>().v_ChangeFlagFalse();
+        if (mg_Cow != null)
+            this.mg_Cow.GetComponent<CharacterMovesWhenDragging>().v_ChangeDragFlagFalse();
+        if (mg_Bean != null)
+            this.mg_Bean.GetComponent<CharacterMovesWhenDragging>().v_ChangeDragFlagFalse();
     }
-
     /// <summary>
-    /// 오브젝트가 잘 전달 되었는지 확인하기위한 Flag값 변경
+    /// 스크립트(대사) 함수 -> 모든 텍스트값을 공백으로 설정하여 출력되는 스크립트(대사)를 없게끔 설정, 생성된 말풍선들 모두 삭제
     /// </summary>
-    public void v_BeanToJack()                                                                              // 콩이 Jack에게 전달됬다고 Flag값 True로 변경
+    private void v_NoneScript()
     {
-        mb_BeanToJack = true;
+        if (mg_GenGFSpeechBubble != null)
+        {
+            mg_ScriptManager.GetComponent<ScriptManager>().v_NoneScript(2);
+            Destroy(mg_GenGFSpeechBubble);
+        }
+        if (mg_GenJackSpeechBubble != null)
+        {
+            this.mg_ScriptManager.GetComponent<ScriptManager>().v_NoneScript(1);
+            Destroy(this.mg_GenJackSpeechBubble);
+        }
+        mg_ScriptManager.GetComponent<ScriptManager>().v_NoneScript(0);
+        mg_ScriptManager.GetComponent<ScriptManager>().v_NoneScript(1);
+        mg_ScriptManager.GetComponent<ScriptManager>().v_NoneScript(2);
     }
-    public void v_CowToGF()                                                                                 // 소가 할아버지에게 전달되었다고 Flag값 True로 변경
-    {
-        mb_CowToGF = true;
-    }
-
     /// <summary>
-    /// 화살표 관련 함수
+    /// 스크립트(대사) 함수 -> 다음 스크립트(대사)를 메인 스크립트 위치에 출력
+    /// </summary>
+    private void v_NextMainScript(){                                                                        // 다음 메인 스크립트를 출력
+        mg_ScriptManager.GetComponent<ScriptManager>().v_NextScript(0);
+    }
+    /// <summary>
+    /// 스크립트(대사) 함수 -> 다음 스크립트(대사)를 Jack 스크립트 위치에 출력 및 Jack 말풍선 생성
+    /// </summary>
+    private void v_NextJackScript(){                                                                        // 다음 Jack 스크립트 출력
+        if (mg_GenJackSpeechBubble == null)
+        {
+            mg_GenJackSpeechBubble = Instantiate(mg_JackSpeech) as GameObject;
+            mg_GenJackSpeechBubble.transform.position = new Vector3(-0.5f, -1, 0);
+        }
+        mg_ScriptManager.GetComponent<ScriptManager>().v_NextScript(1);
+    }
+    /// <summary>
+    /// 스크립트(대사) 함수 -> 다음 스크립트(대사)를 할아버지 스크립트 위치에 출력 및 할아버지 말풍선 생성
+    /// </summary>
+    private void v_NextGFScript(){                                                                          // 다음 할아버지 스크립트 출력
+        if (mg_GenGFSpeechBubble == null)
+        {
+            mg_GenGFSpeechBubble = Instantiate(mg_GFSpeech) as GameObject;
+            mg_GenGFSpeechBubble.transform.position = new Vector3(4, 0.5f, 0);
+        }
+        mg_ScriptManager.GetComponent<ScriptManager>().v_NextScript(2);
+    }
+    /// <summary>
+    /// 화살표 관련 함수 -> 콩을 가르키는 화살표 생성
     /// </summary>
     public void v_GenArrowToBean()                                                                          // 콩을 가르키는 화살표 생성
     {
@@ -381,6 +315,9 @@ public class Jack3_EventController : MonoBehaviour
             mg_ArrowToBean.transform.position = new Vector3(3.5f, -2.5f, 0);
         }
     }
+    /// <summary>
+    /// 화살표 관련 함수 -> 소를 가르키는 화살표 생성
+    /// </summary>
     public void v_GenArrowToCow()                                                                           // 소를 가르키는 화살표 생성
     {
         if (mg_ArrowToCow == null)
@@ -390,6 +327,9 @@ public class Jack3_EventController : MonoBehaviour
             mg_ArrowToCow.GetComponent<SpriteRenderer>().flipX = true;
         }
     }
+    /// <summary>
+    /// 화살표 관련 함수 -> 할아버지를 가르키는 화살표 생성
+    /// </summary>
     public void v_GenArrowToGF()                                                                            // 할아버지를 가르키는 화살표 생성
     {
         if (mg_ArrowToGF == null)
@@ -398,6 +338,9 @@ public class Jack3_EventController : MonoBehaviour
             mg_ArrowToGF.transform.position = new Vector3(5.5f, 0, 0);
         }
     }
+    /// <summary>
+    /// 화살표 관련 함수 -> Jack을 가르키는 화살표 생성
+    /// </summary>
     public void v_GenArrowToJack()                                                                          // Jack을 가르키는 화살표 생성
     {
         if (mg_ArrowToJack == null)
@@ -407,6 +350,9 @@ public class Jack3_EventController : MonoBehaviour
             mg_ArrowToJack.GetComponent<SpriteRenderer>().flipX = true;
         }
     }
+    /// <summary>
+    /// 화살표 관련 함수 -> 할아버지를 가르키는 화살표 삭제
+    /// </summary>
     public void v_RemoveArrowToGF()                                                                         // 할아버지를 가르키는 화살표 삭제
     {
         if(mg_ArrowToGF != null)
@@ -414,6 +360,9 @@ public class Jack3_EventController : MonoBehaviour
             Destroy(mg_ArrowToGF);
         }
     }
+    /// <summary>
+    /// 화살표 관련 함수 -> Jack을 가르키는 화살표 삭제
+    /// </summary>
     public void v_RemoveArrowToJack()                                                                       // Jack을 가르키는 화살표 삭제
     {
         if (mg_ArrowToJack != null)
@@ -421,6 +370,9 @@ public class Jack3_EventController : MonoBehaviour
             Destroy(mg_ArrowToJack);
         }
     }
+    /// <summary>
+    /// 화살표 관련 함수 -> 콩을 가르키는 화살표 삭제
+    /// </summary>
     public void v_RemoveArrowToBean()                                                                       // 콩을 가르키는 화살표 삭제
     {
         if(this.mg_ArrowToBean != null)
@@ -428,6 +380,9 @@ public class Jack3_EventController : MonoBehaviour
             Destroy(this.mg_ArrowToBean);
         }
     }
+    /// <summary>
+    /// 화살표 관련 함수 -> 소를 가르키는 화살표 삭제
+    /// </summary>
     public void v_RemoveArrowToCow()                                                                        // 소를 가르키는 화살표 삭제
     {
         if (this.mg_ArrowToCow)
@@ -435,26 +390,5 @@ public class Jack3_EventController : MonoBehaviour
             Destroy(this.mg_ArrowToCow);
         }
     }
-
-    /// <summary>
-    /// 드래그 상태인지 확인하기 위한 Flag
-    /// </summary>
-    public void v_DragCow()                                                                                 // 소가 드래그 상태임을 나타내는 Flag값 True
-    {
-        mb_DragCowFlag = true;
-    }
-    public void v_NotDragCow()                                                                              // 소가 드래그 상태임을 나타내는 Flag값 False
-    {
-        mb_DragCowFlag = false;
-    }
-    public void v_DragBeanFlagTrue()                                                                        // 콩이 드래그 상태임을 나타내는 Flag값 True
-    {
-        mb_DragBeanFlag = true;
-    }
-    public void v_DragBeanFalgFalse()                                                                       // 콩이 드래그 상태임을 나타내는 Flag값 False
-    {
-        mb_DragBeanFlag = false;
-    }
-
     #endregion
 }
