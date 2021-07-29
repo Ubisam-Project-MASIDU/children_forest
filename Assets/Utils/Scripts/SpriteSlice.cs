@@ -23,10 +23,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// 단순히 Texture 데이터와, 몇개로 나눌지 숫자를 매개변수로 주면 잘린 Sprite 데이터 리스트를 반환하는 함수를 위한 클래스이다. 함수는 static으로 선언되어 클래스의 인스턴스를 생성할 필요가 없도록 하였다.
-/// </summary>
 public class SpriteSlice {
+
     /// <summary>
     /// 단순히 Texture 데이터와, 몇개로 나눌지 숫자를 매개변수로 주면 잘린 Sprite 데이터 리스트를 반환하는 함수.
     /// </summary>

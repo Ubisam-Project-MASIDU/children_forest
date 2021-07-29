@@ -8,13 +8,16 @@
   * 2021-07-19 : 코드 수정
   * 2021-07-21 : 주석 처리
   * 2021-07-22 : 주석 처리 수정
+  * 2021-07-29 : 오브젝트 드래그가 아닌 UI 드래그에 맞춰 인터페이스 적용
   *
   * <Variable>
   * auSource : 마우스를 클릭했을 때 나는 효과음
+  * uiCamera : 메인 카메라 오브젝트
+  * mb_ClassifyPuzzle : 정답 판에 있는 퍼즐은 드래그가 되지 않도록 하기 위한 bool 변수
   *
   * <Function>
-  * OnMouseDrag() : 게임오브젝트를 드래그로 이동시키는 함수
   *
+  * 2021-07-29 : OnDrag() : UI 오브젝트에 맞는 이벤트 함수로, 현재 우리 UI캔버스는 메인 카메라에 맞춰 있기 때문에, Input.mousePosition 위치를 사용하지 못하고, 메인 카메라 오브젝트의 ScreenToWorldPoint() 함수에 한번 거쳐서 사용하여야 한다.
   */
 
 using System.Collections;
