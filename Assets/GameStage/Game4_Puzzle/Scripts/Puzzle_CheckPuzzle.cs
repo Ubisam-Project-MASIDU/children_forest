@@ -24,18 +24,19 @@ using UnityEngine.SceneManagement;
 public class Puzzle_CheckPuzzle : MonoBehaviour {
     VoiceManager vm;
     bool mb_checkVoice = false;
-
+    GameObject mgo_RemainPuzzle;
     //초기설정
     void Start(){
         vm = GameObject.Find("VoiceManager").GetComponent<VoiceManager>();
+        mgo_RemainPuzzle = GameObject.Find("ProblemWindow").gameObject;
     }
     void Update(){
-        if(transform.childCount <= 9){          //퍼즐을 다 맞추면
+        if(mgo_RemainPuzzle.transform.childCount == 0){          //퍼즐을 다 맞추면
             if(!mb_checkVoice){                 //스크립트 음성이 한번도 나온적이 없다면
                 vm.playVoice(0);                //스크립트 음성 재생
                 mb_checkVoice = true;           //스크립트 음성 재생 체크
             }
-            Destroy(transform.Find("arrow"));   //arrow 오브젝트 없애기
+            Destroy(GameObject.Find("arrow"));   //arrow 오브젝트 없애기
             Invoke("v_EndStage", 2f);           //2초 후 v_Endstage함수 호출
         }
     }

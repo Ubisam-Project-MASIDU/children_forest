@@ -20,24 +20,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Drag : MonoBehaviour{
+public class Drag : MonoBehaviour, IDragHandler {
   AudioSource auSource;
+  Camera uiCamera;
+  bool mb_ClassifyPuzzle;
   //초기설정
-  void Start(){
+  void Start() {
+    mb_ClassifyPuzzle = gameObject.GetComponent<Puzzle_Matching_Puzzle>().mb_classifyWhetherAns;
     auSource = GetComponent<AudioSource>();
-  }
+    uiCamera = Camera.main;
+  } 
+  public void OnDrag(PointerEventData eventData) {
+    if (!mb_ClassifyPuzzle) {
+      var screenPoint = new Vector3(Input.mousePosition.x,Input.mousePosition.y,100.0f); // z값을 Plane Distance 값을 줘야 합니다!! 
+      transform.position = uiCamera.ScreenToWorldPoint(screenPoint); // 그리고 좌표 변환을 하면 끝!
+    }
 
-  //게임오브젝트를 드래그로 이동시키는 함수
-  void OnMouseDrag(){
-    Vector2 v2mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-    Vector2 v2worldObjPos = Camera.main.ScreenToWorldPoint(v2mousePosition);
-    this.transform.position = v2worldObjPos;
   }
-  
-  //마우스를 클릭했을때 
-  void OnMouseDown(){ 
-    auSource.Play();
-  }
-
 }

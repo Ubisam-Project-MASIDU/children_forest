@@ -23,13 +23,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Puzzle_Matching_Puzzle : MonoBehaviour{
+public class Puzzle_Matching_Puzzle : MonoBehaviour {
     public bool mb_classifyWhetherAns = false;
     public Sprite sNextSprite;
+    public int mn_PuzzleId;
     Vector2 mv2_initPos;
     private void Start(){
         if(!mb_classifyWhetherAns){                                                                             //퍼즐 매칭 되기 전 상태이면
-            transform.position = new Vector3(Random.Range(19, 26), Random.Range(3, 11), 0);                     //자리 랜덤 선정
+            transform.position = new Vector3(Random.Range(24f, 29f), Random.Range(4f, 11f), 0);                     //자리 랜덤 선정
             mv2_initPos = transform.position;                                                                   //초기 자리 저장 (퍼즐을 맞추지 못할 경우 제자리로 돌아가기 위함)
         }
     }
@@ -38,19 +39,24 @@ public class Puzzle_Matching_Puzzle : MonoBehaviour{
             transform.position = Vector3.MoveTowards(this.transform.position, mv2_initPos, 2f * Time.deltaTime); //처음 지정된 랜덤자리로 다시 되돌아감.
         }
     }
+
     void OnTriggerStay2D(Collider2D cCollideObject){
-        if(Input.GetMouseButtonUp(0)){                                                                          //손을 뗐을 때
-            if (cCollideObject.name[cCollideObject.name.Length - 1] == this.name[this.name.Length - 1]){        //정답이면
-                if (mb_classifyWhetherAns){                                                                     //answer부분변경
-                    Color tempColor = gameObject.GetComponent<SpriteRenderer>().color;                          //흐렷던 퍼즐조각을 선명하게 변경
-                    tempColor.a = 1f;
-                    gameObject.GetComponent<SpriteRenderer>().color = tempColor;    
+        if(Input.GetMouseButtonUp(0)){
+            if (cCollideObject.GetComponent<Puzzle_Matching_Puzzle>() != null) {
+                if (cCollideObject.GetComponent<Puzzle_Matching_Puzzle>().mn_PuzzleId == this.mn_PuzzleId){        //정답이면
+                    if (mb_classifyWhetherAns){                                                                     //answer부분변경
+                        Color tempColor = gameObject.GetComponent<Image>().color;                          //흐렷던 퍼즐조각을 선명하게 변경
+                        tempColor.a = 1f;
+                        gameObject.GetComponent<Image>().color = tempColor;    
+                    }
+                    else{                                                                                           
+                        Destroy(this.gameObject);
+                    }
                 }
-                else{                                                                                           
-                    Destroy(this.gameObject);
-                }
-            }
+            }                                                                          //손을 뗐을 때
+
         }
     }
+    
 }
 
