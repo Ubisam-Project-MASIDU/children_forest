@@ -30,11 +30,17 @@ public class Drag_Jack : MonoBehaviour{
     public GameObject mg_Jack;
     public ScriptControl sc;
     VoiceManager vm;
+    bool DragFlag = false;
 
     //초기설정
     void Start(){
         sc = ScriptControl.GetInstance();                                          // ScriptControl에서 Instance 리턴 받아 사용
         this.vm = GameObject.Find("VoiceManager").GetComponent<VoiceManager>();
+
+    }
+
+    void Update()
+    {
 
     }
 
@@ -44,6 +50,8 @@ public class Drag_Jack : MonoBehaviour{
         if(cCollideObject.tag == "Closet"){                                         //Jack이 옷장 뒤에 숨으면
             sc.setNextScript();                                                     //다음 스크립트 제시
             vm.playVoice(1);                                                        //다음 스크립트에 해당하는 tts 실행
+            Destroy(this.gameObject);
+            Destroy(GameObject.Find("Click").gameObject);
         }
         if(!vm.isPlaying()) {                                                       //tts재생이 끝나면
             Invoke("gotoEpi9Scene", 5f);                                            //5초 후 gotoEpi9Scene 함수 수행 
@@ -52,13 +60,22 @@ public class Drag_Jack : MonoBehaviour{
 
     //게임오브젝트를 드래그로 이동시키는 함수
     void OnMouseDrag(){
-                Vector2 v2mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                Vector2 v2worldObjPos = Camera.main.ScreenToWorldPoint(v2mousePosition);
-                mg_Jack.transform.position = v2worldObjPos;
+        if(DragFlag == true)
+        {
+            Vector2 v2mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 v2worldObjPos = Camera.main.ScreenToWorldPoint(v2mousePosition);
+            mg_Jack.transform.position = v2worldObjPos;
+        }
     }
 
     //Epi9로 씬 이동을 위한 함수
     void gotoEpi9Scene() {
         SceneManager.LoadScene("Jack_Epi9");                                        //Jack_Epi9 씬 로드
     }
+
+    public void ChangeDragFlagTrue()
+    {
+        DragFlag = true;
+    }
+
 }

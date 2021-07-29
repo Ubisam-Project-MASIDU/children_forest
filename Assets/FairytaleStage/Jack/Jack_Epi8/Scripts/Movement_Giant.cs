@@ -29,11 +29,14 @@ public class Movement_Giant : MonoBehaviour{
   bool mb_checkPlayOnce = false;
   public ScriptControl sc;
   VoiceManager vm;
+    GameObject mg_Jack;
+    bool Flag = false;
 
   //초기설정
   void Start(){
     sc = ScriptControl.GetInstance();
     this.vm = GameObject.Find("VoiceManager").GetComponent<VoiceManager>();
+        mg_Jack = GameObject.Find("Jack");
     }
   
   void Update(){
@@ -42,7 +45,12 @@ public class Movement_Giant : MonoBehaviour{
       if(!mb_checkPlayOnce){                                                                                               //스크립트 음성이 한번도 나온적이 없다면
         vm.playVoice(0);                                                                                                   //스크립트 음성 재생
         mb_checkPlayOnce = true;                                                                                           //스크립트 음성 재생 체크
-      } 
+      }
+      else if (!vm.isPlaying() && Flag == false)
+            {
+                mg_Jack.GetComponent<Drag_Jack>().ChangeDragFlagTrue();
+                Flag = true;
+            }
     }
   }
 }
