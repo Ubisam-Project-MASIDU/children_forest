@@ -109,7 +109,7 @@ public class Jack3_EventController : MonoBehaviour
         }
 
         //드래그 상태에 따른 화살표 이펙트 효과 처리 부분
-        if (mg_Cow != null)
+        if (mg_Cow != null && mn_EventSequence >= 8)
         {
             if (mg_Cow.GetComponent<CharacterMovesWhenDragging>().b_CheckDragging() == true)
             {
@@ -145,7 +145,7 @@ public class Jack3_EventController : MonoBehaviour
                     v_GenArrowToBean();
             }
         }
-        else if(mg_Bean != null)
+        else if(mg_Bean != null && mn_EventSequence >= 8)
         {
             if (mg_Bean.GetComponent<CharacterMovesWhenDragging>().b_CheckDragging() == true)
             {
@@ -163,7 +163,7 @@ public class Jack3_EventController : MonoBehaviour
                     v_GenArrowToBean();
             }
         }
-        else
+        else if(mg_Bean == null && mg_Cow == null)
         {
             SceneManager.LoadScene("Jack_Epi4");
         }
