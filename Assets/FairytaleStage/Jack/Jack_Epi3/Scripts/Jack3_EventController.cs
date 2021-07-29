@@ -97,6 +97,8 @@ public class Jack3_EventController : MonoBehaviour
         this.mg_Cow = GameObject.Find("Jack3_Cow");
         this.mg_Bean = GameObject.Find("Jack3_Bean");
         this.mvm_playVoice = GameObject.Find("VoiceManager").GetComponent<VoiceManager>();
+
+        v_TurnOFFMouseDrag();                                                                                               // 로딩중에도 드래그가 되지않게 설정
     }
 
     void Update(){
@@ -172,7 +174,6 @@ public class Jack3_EventController : MonoBehaviour
             mb_PlaySound = true;
             mvm_playVoice.playVoice(mn_EventSequence);
             v_NextMainScript();
-            v_TurnOFFMouseDrag();
         }
         if (mn_EventSequence == 1 && this.mb_EventFlag == true){                                    // 화면을 1번 터치하면 진행
             v_ChangeFlagFalse();                                                                    // 이벤트를 한번만 실행하기위한 flag값 False로 변경
