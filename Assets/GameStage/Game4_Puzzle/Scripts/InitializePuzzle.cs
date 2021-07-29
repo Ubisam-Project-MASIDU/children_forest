@@ -40,7 +40,6 @@ public class InitializePuzzle : MonoBehaviour {
     private Sprite[] mspl_slicedPuzzle;
     public Texture2D mtex2_slicePuzzle;
 
-
     /// <summary>
     /// 윈도우 사이즈에 맞춰 그리드 셀 사이즈를 조절하고, 그 그리드에 맞춰 퍼즐 조각을 생성해준다.
     /// </summary>
@@ -69,6 +68,9 @@ public class InitializePuzzle : MonoBehaviour {
                 row = 3;
                 break;
         }
+
+        GameObject.Find("CheckPuzzle").GetComponent<Puzzle_CheckPuzzle>().mn_AnswerPuzzle = col * row;
+
         mspl_slicedPuzzle = SpriteSlice.sliceSprite(col, row, mtex2_slicePuzzle);
         mglg_AnsGridSize.cellSize = new Vector2((mf_originWidth - 100) / col, (mf_originHeight - 100) / row);
         mglg_ProbGridSize.cellSize = new Vector2((mf_originWidth - 100) / col, (mf_originHeight - 100) / row);

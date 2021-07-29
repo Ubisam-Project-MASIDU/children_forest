@@ -25,13 +25,15 @@ public class Puzzle_CheckPuzzle : MonoBehaviour {
     VoiceManager vm;
     bool mb_checkVoice = false;
     GameObject mgo_RemainPuzzle;
+    public int mn_AnswerPuzzle = -1;
+    int mn_CheckAnswerPuzzle = 0;
     //초기설정
     void Start(){
         vm = GameObject.Find("VoiceManager").GetComponent<VoiceManager>();
         mgo_RemainPuzzle = GameObject.Find("ProblemWindow").gameObject;
     }
     void Update(){
-        if(mgo_RemainPuzzle.transform.childCount == 0){          //퍼즐을 다 맞추면
+        if(mn_AnswerPuzzle == mn_CheckAnswerPuzzle){          //퍼즐을 다 맞추면
             if(!mb_checkVoice){                 //스크립트 음성이 한번도 나온적이 없다면
                 vm.playVoice(0);                //스크립트 음성 재생
                 mb_checkVoice = true;           //스크립트 음성 재생 체크
@@ -41,6 +43,9 @@ public class Puzzle_CheckPuzzle : MonoBehaviour {
         }
     }
 
+    public void setAnswerPuzzle() {
+        mn_CheckAnswerPuzzle++;
+    }
     //end씬 불러오는 함수
     void v_EndStage() {
         SceneManager.LoadScene("end_scene");

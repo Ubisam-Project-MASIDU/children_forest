@@ -35,11 +35,11 @@ public class Drag : MonoBehaviour, IDragHandler {
     auSource = GetComponent<AudioSource>();
     uiCamera = Camera.main;
   } 
+ 
   public void OnDrag(PointerEventData eventData) {
     if (!mb_ClassifyPuzzle) {
       var screenPoint = new Vector3(Input.mousePosition.x,Input.mousePosition.y,100.0f); // z값을 Plane Distance 값을 줘야 합니다!! 
       transform.position = uiCamera.ScreenToWorldPoint(screenPoint); // 그리고 좌표 변환을 하면 끝!
     }
-
   }
 }
