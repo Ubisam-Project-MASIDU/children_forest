@@ -882,8 +882,8 @@ GameObject:
   - component: {fileID: 1801041016}
   - component: {fileID: 1801041015}
   - component: {fileID: 1801041014}
-  - component: {fileID: 1801041013}
   - component: {fileID: 1801041018}
+  - component: {fileID: 1801041013}
   m_Layer: 0
   m_Name: Jack
   m_TagString: Untagged
@@ -900,7 +900,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1801041012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f77ef07332554f198b11b886cc59418, type: 3}
+  m_Script: {fileID: 11500000, guid: 34a77bd1a1086e24eb8eccf98a5ba302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!50 &1801041014
