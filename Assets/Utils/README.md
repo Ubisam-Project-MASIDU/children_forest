@@ -11,7 +11,7 @@
      - 21.07.19 : SoundManager.cs 스크립트 제작.
      - 21.07.22 : ImgSizeResize.cs 스크립트 제작.
      - 21.07.23 : BGMmanager.cs 스크립트 제작.
-     - 
+     - 21.07.29 : BlinkObject.cs, CharacterMovesWhenDragging.cs, ScriptManager.cs 추가.
 ***
 - Utils 구성 정보
 > 🗂 *Scripts*
