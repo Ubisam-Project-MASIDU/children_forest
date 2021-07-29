@@ -770,11 +770,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 738385243}
-  - component: {fileID: 738385242}
   - component: {fileID: 738385244}
-  - component: {fileID: 738385246}
-  - component: {fileID: 738385245}
-  - component: {fileID: 738385247}
+  - component: {fileID: 738385242}
   m_Layer: 0
   m_Name: Jack3_GameDirector
   m_TagString: Untagged
@@ -791,9 +788,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 738385241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99d51d897f51d1546b89f395dcf8b136, type: 3}
+  m_Script: {fileID: 11500000, guid: c19cb74f3b6e09442817b1313dcdf7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ms_Script:
+  - "\uC7AD\uC740 \uAE38\uC744 \uAC00\uB2E4\uAC00 \uD560\uC544\uBC84\uC9C0\uB97C
+    \uB9CC\uB0AC\uC5B4\uC694."
+  - "\uC598\uC57C \uC5B4\uB51C \uADF8\uB807\uAC8C \uBC14\uC058\uAC8C \uAC00\uB2C8?"
+  - "\uC7A5\uC5D0 \uC816\uC18C\uB97C \uD314\uB7EC \uAC00\uC694."
+  - "\uADF8\uB7FC \uADF8 \uC816\uC18C\uC640 \uC774 \uCF69\uC744 \uBC14\uAFB8\uC790\uAFB8\uB098."
+  - "\uC774 \uCF69\uC740 \uC2EC\uC740 \uC9C0 \uD558\uB8E8 \uB9CC\uC5D0 \uD558\uB298\uC5D0
+    \uB2FF\uC744 \uB9CC\uD07C \uB192\uC774 \uC790\uB77C\uB294 \uB9C8\uC220 \uCF69\uC774\uB780\uB2E4."
+  - "\uC7AD\uC740 \uB9C8\uC220 \uCF69\uC774\uB77C\uB294 \uB9D0\uC5D0 \uC194\uAE43\uD574\uC84C\uC5B4\uC694."
+  - "\uC88B\uC544\uC694 \uD560\uC544\uBC84\uC9C0!"
+  - "\uC7AD\uC740 \uB0C9\uD07C \uCEE4\uB2E4\uB780 \uC816\uC18C\uC640 \uCF69\uC744
+    \uBC14\uAFB8\uC5C8\uC5B4\uC694."
+  - "\uC816\uC18C\uC640 \uCF69\uC744 \uB4DC\uB798\uADF8\uD558\uC5EC \uBC14\uAFD4\uC8FC\uC138\uC694."
+  mg_ScriptObject:
+  - {fileID: 331779153}
+  - {fileID: 158363459}
+  - {fileID: 2027891356}
 --- !u!4 &738385243
 Transform:
   m_ObjectHideFlags: 0
@@ -823,42 +837,6 @@ MonoBehaviour:
   mg_ArrowPrefab: {fileID: 3548232359028367037, guid: c35eff97fb9f1fb40829946eaf1a28d0, type: 3}
   mg_GFSpeech: {fileID: 7453365856918644861, guid: 46ced7628d7ea844287ade3b8d3b142d, type: 3}
   mg_JackSpeech: {fileID: 5372921749522760305, guid: 4950cf57b9cdbff40bceed8f1b128c9f, type: 3}
---- !u!114 &738385245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738385241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6254231d93265ed4f9075bf3224031b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &738385246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738385241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ca9f20ed0c57124881b978e5bdc8c8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &738385247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738385241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5d75a59ff40a794b8516ecb8695bec8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &844530746
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,6 +849,7 @@ GameObject:
   - component: {fileID: 844530747}
   - component: {fileID: 844530749}
   - component: {fileID: 844530750}
+  - component: {fileID: 844530751}
   m_Layer: 0
   m_Name: Jack3_Cow
   m_TagString: Jack3_Cow
@@ -978,7 +957,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 844530746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2d6fc1b2ab294b49aa0a56efc892294, type: 3}
+  m_Script: {fileID: 11500000, guid: 496487fb71198d742a743866bdda3329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &844530751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844530746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3589c3a934f494490f14dcfe2bd3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1059066044
@@ -1427,6 +1418,7 @@ GameObject:
   - component: {fileID: 1919226266}
   - component: {fileID: 1919226268}
   - component: {fileID: 1919226269}
+  - component: {fileID: 1919226270}
   m_Layer: 0
   m_Name: Jack3_Bean
   m_TagString: Jack3_Bean
@@ -1534,7 +1526,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1919226265}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2d6fc1b2ab294b49aa0a56efc892294, type: 3}
+  m_Script: {fileID: 11500000, guid: 496487fb71198d742a743866bdda3329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1919226270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919226265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c30f27a174f0884f82377fa44f80b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2027891356

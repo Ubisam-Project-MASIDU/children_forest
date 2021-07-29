@@ -21,6 +21,7 @@
  * OnMouseUp()                          오브젝트에서 손을 떼는 경우
  * v_ChangeDragFlagTrue()               오브젝트가 Drag 가능한 상태로 변경
  * v_ChangeDragFlagFalse()              오브젝트가 Drag 불가능한 상태로 변경
+ * v_CheckDragFlag()                    오브젝트가 드래그 가능한 상태인지 확인
  * b_CheckDragging()                    오브젝트가 현재 드래그 중인지 확인하는 함수
  * b_CheckMouseUp()                     오브젝트에서 손을 떼는순간 Flag값 True 반환해주는 함수
  */
@@ -101,6 +102,14 @@ public class CharacterMovesWhenDragging : MonoBehaviour
     public void v_ChangeDragFlagFalse()
     {
         mb_DragFlag = false;
+    }
+    /// <summary>
+    /// 드래그가 가능한 상태인지 확인
+    /// </summary>
+    /// <returns>드래그가 가능한 상태면 True, 아니면 False</returns>
+    public bool v_CheckDragFlag()
+    {
+        return mb_DragFlag;
     }
     /// <summary>
     /// 현재 드래그상태인지 확인

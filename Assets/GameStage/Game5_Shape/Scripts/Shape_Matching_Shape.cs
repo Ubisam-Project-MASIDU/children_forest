@@ -34,7 +34,7 @@ public class Shape_Matching_Shape : MonoBehaviour{
         mv2_initPos = this.transform.position;                                                                      //초기 자리 저장 (도형을 맞추지 못할 경우 제자리로 돌아가기 위함)
     }
     void Update() {
-        this.transform.position = Vector3.MoveTowards(this.transform.position, mv2_initPos, 2f * Time.deltaTime);   //도형을 맞추지 못했을 경우 초기 위치로 제자리.
+        this.transform.position = Vector3.MoveTowards(this.transform.position, mv2_initPos, 10f * Time.deltaTime);   //도형을 맞추지 못했을 경우 초기 위치로 제자리.
     }
     void OnTriggerStay2D(Collider2D cCollideObject){
         if(Input.GetMouseButtonUp(0)) {                                                                             //도형맞추려고 시도(드래그 후 맞춤판정 후 )
