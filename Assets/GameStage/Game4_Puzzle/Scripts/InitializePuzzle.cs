@@ -23,6 +23,7 @@
  *
  */
 
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,7 +40,7 @@ public class InitializePuzzle : MonoBehaviour {
     private GridLayoutGroup mglg_ProbGridSize;
     private Sprite[] mspl_slicedPuzzle;
     public Texture2D mtex2_slicePuzzle;
-
+    private int[] myArray;
     /// <summary>
     /// 윈도우 사이즈에 맞춰 그리드 셀 사이즈를 조절하고, 그 그리드에 맞춰 퍼즐 조각을 생성해준다.
     /// </summary>
@@ -72,6 +73,9 @@ public class InitializePuzzle : MonoBehaviour {
         GameObject.Find("CheckPuzzle").GetComponent<Puzzle_CheckPuzzle>().mn_AnswerPuzzle = col * row;
 
         mspl_slicedPuzzle = SpriteSlice.sliceSprite(col, row, mtex2_slicePuzzle);
+        myArray = Enumerable.Range(0, col * row).ToArray();
+        Shuffle.ShuffleArray<int>(myArray);
+
         mglg_AnsGridSize.cellSize = new Vector2((mf_originWidth - 100) / col, (mf_originHeight - 100) / row);
         mglg_ProbGridSize.cellSize = new Vector2((mf_originWidth - 100) / col, (mf_originHeight - 100) / row);
     
@@ -88,6 +92,8 @@ public class InitializePuzzle : MonoBehaviour {
     /// <param name="tParent">자식 오브젝트를 생성할 부모 오브젝트를 지정해주면 된다.</param>
     /// <param name="bClassifyType">정답 퍼즐인지, 플레이어가 조종하는 퍼즐인지에 맞춰 오브젝트 세팅을 변경한다.</param>
     void setChild(int nChild, Transform tParent, bool bClassifyType) {
+        Sprite[] tempSprite = new Sprite[mspl_slicedPuzzle.Length];
+        Debug.Log(tempSprite[0]);
         for (int i = 0; i < nChild; i++) {
             GameObject temp = GameObject.Instantiate(mgo_SetPuzzle, tParent);
             temp.GetComponent<Puzzle_Matching_Puzzle>().mn_PuzzleId = i;
@@ -95,12 +101,14 @@ public class InitializePuzzle : MonoBehaviour {
             if (bClassifyType) {
                 temp.GetComponent<Image>().sprite = mspl_slicedPuzzle[i];
                 temp.GetComponent<Puzzle_Matching_Puzzle>().mb_classifyWhetherAns = bClassifyType;
-                Color tempColor = temp.GetComponent<Image>().color;                          //흐렷던 퍼즐조각을 선명하게 변경
+                Color tempColor = temp.GetComponent<Image>().color;                          
                 tempColor.a = 0.1f;
                 temp.GetComponent<Image>().color = tempColor;
             }
-            else
-                temp.GetComponent<Image>().sprite = mspl_slicedPuzzle[i];
+            else {
+                temp.GetComponent<Puzzle_Matching_Puzzle>().mn_PuzzleId = myArray[i];
+                temp.GetComponent<Image>().sprite = mspl_slicedPuzzle[myArray[i]];
+            }
         }
     }
 }

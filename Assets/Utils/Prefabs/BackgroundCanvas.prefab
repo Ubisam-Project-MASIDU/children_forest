@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 2655168929005838721}
   - component: {fileID: 2655168929005838734}
   - component: {fileID: 2655168929005838735}
-  - component: {fileID: 2655168929005838732}
+  - component: {fileID: 6445313763806183524}
   m_Layer: 5
   m_Name: backController
   m_TagString: homeController
@@ -293,7 +293,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 100, y: 100}
   m_EdgeRadius: 0
---- !u!114 &2655168929005838732
+--- !u!114 &6445313763806183524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,7 +302,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2655168929005838730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b33793a9f1d4dae9d52da70ec021a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a2fa873762f2439fb1b4bdbe5b13318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ms_backScene: select_stage_scene

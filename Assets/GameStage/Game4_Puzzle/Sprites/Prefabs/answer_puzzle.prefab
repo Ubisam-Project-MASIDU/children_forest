@@ -94,6 +94,7 @@ MonoBehaviour:
   mb_classifyWhetherAns: 0
   sNextSprite: {fileID: 0}
   mn_PuzzleId: 0
+  mv2_initPos: {x: 0, y: 0}
 --- !u!50 &294683185449032670
 Rigidbody2D:
   serializedVersion: 4
@@ -151,5 +152,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 100, y: 100}
+  m_Size: {x: 200, y: 200}
   m_EdgeRadius: 0

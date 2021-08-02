@@ -25,14 +25,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Drag : MonoBehaviour, IDragHandler {
+public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler {
   AudioSource auSource;
   Camera uiCamera;
   bool mb_ClassifyPuzzle;
+  SoundManager soundManager;
   //초기설정
   void Start() {
     mb_ClassifyPuzzle = gameObject.GetComponent<Puzzle_Matching_Puzzle>().mb_classifyWhetherAns;
     auSource = GetComponent<AudioSource>();
+    soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     uiCamera = Camera.main;
   } 
  
@@ -40,6 +42,13 @@ public class Drag : MonoBehaviour, IDragHandler {
     if (!mb_ClassifyPuzzle) {
       var screenPoint = new Vector3(Input.mousePosition.x,Input.mousePosition.y,100.0f); // z값을 Plane Distance 값을 줘야 합니다!! 
       transform.position = uiCamera.ScreenToWorldPoint(screenPoint); // 그리고 좌표 변환을 하면 끝!
+
     }
+  }
+  public void OnBeginDrag(PointerEventData eventData) {
+      soundManager.playSound(0);
+  }
+  public void OnEndDrag(PointerEventData eventData) {
+      soundManager.playSound(1);
   }
 }
